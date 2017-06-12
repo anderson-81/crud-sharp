@@ -1,9 +1,8 @@
 # CRUD-Sharp--sqlite
 
 1 - Description:
-  - Prototype of CRUD in C# with SQLite. Done at Object Orientation, and transactional. 
-    Tools Used: Visual Studio 2013, SQLite and ADO.NET (ADO.NET provider for SQLite).
-
+  - Prototype of CRUD in C# with SQLite. Uses the concept of database transaction.
+  
 2 - This CRUD has:
   - Login (SHA512)
   - Hide Icon (Toolbar)
