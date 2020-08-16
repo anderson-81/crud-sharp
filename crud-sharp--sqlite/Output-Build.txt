@@ -1,4 +1,0 @@
-﻿1>------ Build started: Project: CRUD-Sharp, Configuration: Release Any CPU ------
-1>C:\Users\MyPC\documents\visual studio 2013\Projects\Project\CRUD-Sharp\FRegistration.cs(17,27,17,30): warning CS0649: Field 'CRUD_Sharp.FrmRegistration.frs' is never assigned to, and will always have its default value null
-1>  CRUD-Sharp -> C:\Users\MyPC\documents\visual studio 2013\Projects\Project\CRUD-Sharp\bin\Release\CRUD-Sharp.exe
-========== Build: 1 succeeded, 0 failed, 1 up-to-date, 0 skipped ==========
