@@ -1,0 +1,205 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="LibCrud.PhysicalPerson">
+    <Position X="4.25" Y="2.5" Width="1.5" />
+    <Members>
+      <Property Name="Comment" Hidden="true" />
+      <Property Name="Cpf" Hidden="true" />
+      <Property Name="CreateAt" Hidden="true" />
+      <Property Name="Email" Hidden="true" />
+      <Property Name="Gender" Hidden="true" />
+      <Property Name="Id" Hidden="true" />
+      <Property Name="Name" Hidden="true" />
+      <Property Name="Salary" Hidden="true" />
+      <Property Name="Status" Hidden="true" />
+    </Members>
+    <TypeIdentifier>
+      <HashCode>AEACMCAEECIAAACEAABAAEQAAAAIAAAAAAEAAASAAAE=</HashCode>
+      <FileName>Models\PhysicalPerson.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LibCrud.JuridicalPerson">
+    <Position X="1" Y="3.25" Width="1.5" />
+    <Members>
+      <Property Name="Cnpj" Hidden="true" />
+      <Property Name="Comment" Hidden="true" />
+      <Property Name="CompanyName" Hidden="true" />
+      <Property Name="CreateAt" Hidden="true" />
+      <Property Name="Email" Hidden="true" />
+      <Property Name="Id" Hidden="true" />
+      <Property Name="Name" Hidden="true" />
+      <Property Name="Status" Hidden="true" />
+    </Members>
+    <TypeIdentifier>
+      <HashCode>AEACYAAEECIAAAAEAABAAAQAAAQEAAAAAAEAAAAAAAE=</HashCode>
+      <FileName>Models\JuridicalPerson.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LibCrud.JuridicalPersonFactory">
+    <Position X="6.25" Y="9.25" Width="2" />
+    <Compartments>
+      <Compartment Name="Fields" Collapsed="true" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AEAAIAAAEAAAAAAAAABAAAAAAAQEIAAAAAEAAAAAAAE=</HashCode>
+      <FileName>Factories\JuridicalPersonFactory.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LibCrud.PhysicalPersonFactory">
+    <Position X="9.25" Y="10.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AEAAMAAAEAAAAAAAAABAAEAAAAAAIAAAAAEAAAQAAAE=</HashCode>
+      <FileName>Factories\PhysicalPersonFactory.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LibCrud.PersonFactory">
+    <Position X="8" Y="7" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Factories\PersonFactory.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LibCrud.Person">
+    <Position X="1.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAEACIAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Models\Person.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LibCrud.ConfigurationDatabase">
+    <Position X="9.5" Y="15" Width="2.75" />
+    <NestedTypes>
+      <Enum Name="LibCrud.ConfigurationDatabase.DatabaseName" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>ConfigurationDatabase.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Enum>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>ABAAAAAAAAIAEABEAAAAAAEAACAEAAgAAgAAAggAAAA=</HashCode>
+      <FileName>Connections\ConfigurationDatabase.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LibCrud.JuridicalPersonController">
+    <Position X="0.75" Y="11.5" Width="2.25" />
+    <NestedTypes>
+      <Enum Name="LibCrud.JuridicalPersonController.OptionIdentity" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>Controllers\JuridicalPersonController.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Enum>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>AAAQAAIACAEAAgAAAACAAAAAAAAgAAAggAAAAAAAIAA=</HashCode>
+      <FileName>Controllers\JuridicalPersonController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LibCrud.PersonController">
+    <Position X="3.25" Y="7.5" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAQAAAAAAkAAAQAAABAAAAAAAAAAAAgAEIAAAhAAAA=</HashCode>
+      <FileName>Controllers\PersonController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LibCrud.PhysicalPersonController">
+    <Position X="4" Y="12.25" Width="2.5" />
+    <NestedTypes>
+      <Enum Name="LibCrud.PhysicalPersonController.OptionAVGSalary" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>PhysicalPersonController.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Enum>
+      <Enum Name="LibCrud.PhysicalPersonController.OptionSalary" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>PhysicalPersonController.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Enum>
+      <Enum Name="LibCrud.PhysicalPersonController.OptionGender" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>PhysicalPersonController.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Enum>
+      <Enum Name="LibCrud.PhysicalPersonController.OptionIdentity" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>Controllers\PhysicalPersonController.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Enum>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>CAgSAQAAQAEAAIAAAAAEAEAAgAAAAiAwAAAAAAABAAg=</HashCode>
+      <FileName>Controllers\PhysicalPersonController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LibCrud.UserController">
+    <Position X="0.5" Y="7.5" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAABEAAAAAAIAgAAAQBAAAAAA=</HashCode>
+      <FileName>Controllers\UserController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LibCrud.Facade">
+    <Position X="13.75" Y="7.75" Width="2.5" />
+    <NestedTypes>
+      <Enum Name="LibCrud.Facade.OptionPerson" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>Facades\Facade.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Enum>
+      <Enum Name="LibCrud.Facade.OptionAVGSalary" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>Facades\Facade.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Enum>
+      <Enum Name="LibCrud.Facade.OptionSalary" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>Facades\Facade.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Enum>
+      <Enum Name="LibCrud.Facade.OptionGender" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>Facades\Facade.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Enum>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>GAgEAQAQSEFQBIIEBAiAIEEAgAAAAKQAgAAQAAAAQAg=</HashCode>
+      <FileName>Facades\Facade.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LibCrud.PersonFacade">
+    <Position X="11.5" Y="4.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAACQCAEACIAAACAAAAAAASAAAAIAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Facades\PersonFacade.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LibCrud.ValidationData">
+    <Position X="16.5" Y="4.25" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AACAAAAAAAAAAAIgAAABABAAAAAAAAEAAAgAAAggACA=</HashCode>
+      <FileName>Facades\ValidationData.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LibCrud.ConnectionFactory">
+    <Position X="7.25" Y="15" Width="1.75" />
+    <NestedTypes>
+      <Enum Name="LibCrud.ConnectionFactory.DatabaseName" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>ConnectionFactory.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Enum>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>EAAEAAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAEAAAAAA=</HashCode>
+      <FileName>Factories\ConnectionFactory.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LibCrud.User">
+    <Position X="7" Y="2.75" Width="1.75" />
+    <TypeIdentifier>
+      <HashCode>AAACAAAAAAIAAAAAAQAAAAEAAAAAAAACAAAAAgAAAgA=</HashCode>
+      <FileName>Models\User.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

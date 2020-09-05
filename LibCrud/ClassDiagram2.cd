@@ -1,0 +1,57 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="LibCrud.PhysicalPerson">
+    <Position X="1" Y="1.5" Width="1.5" />
+    <Members>
+      <Property Name="Comment" Hidden="true" />
+      <Property Name="Cpf" Hidden="true" />
+      <Property Name="CreateAt" Hidden="true" />
+      <Property Name="DateBirth" Hidden="true" />
+      <Property Name="Email" Hidden="true" />
+      <Property Name="Gender" Hidden="true" />
+      <Property Name="Id" Hidden="true" />
+      <Property Name="Name" Hidden="true" />
+      <Property Name="Salary" Hidden="true" />
+      <Property Name="Status" Hidden="true" />
+    </Members>
+    <TypeIdentifier>
+      <HashCode>AAQCACAEASIgAAGkAAAAgAQAAAAEAAAAAIAAAgCAAgA=</HashCode>
+      <FileName>PhysicalPerson.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Class Name="LibCrud.JuridicalPerson">
+    <Position X="2.75" Y="1.5" Width="1.5" />
+    <Members>
+      <Property Name="Cnpj" Hidden="true" />
+      <Property Name="Comment" Hidden="true" />
+      <Property Name="CompanyName" Hidden="true" />
+      <Property Name="CreateAt" Hidden="true" />
+      <Property Name="Email" Hidden="true" />
+      <Property Name="Id" Hidden="true" />
+      <Property Name="Name" Hidden="true" />
+      <Property Name="Status" Hidden="true" />
+    </Members>
+    <TypeIdentifier>
+      <HashCode>AAQCYAAEACIAAAAgAAAAAAQAAAAEAAAAAAAAAgAAAmA=</HashCode>
+      <FileName>JuridicalPerson.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" />
+  </Class>
+  <Interface Name="LibCrud.IPerson" Collapsed="true">
+    <Position X="1" Y="0.5" Width="1.5" />
+    <Members>
+      <Property Name="Comment" Hidden="true" />
+      <Property Name="CreateAt" Hidden="true" />
+      <Property Name="Email" Hidden="true" />
+      <Property Name="Id" Hidden="true" />
+      <Property Name="Name" Hidden="true" />
+      <Property Name="Status" Hidden="true" />
+    </Members>
+    <TypeIdentifier>
+      <HashCode>AAACAAAEACIAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>IPerson.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
