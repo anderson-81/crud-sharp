@@ -1,5 +1,4 @@
-﻿using LibCrud;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -12,12 +11,6 @@ namespace CrudSharp
 {
     public partial class FrmBornMonth : Form
     {
-        public FrmBornMonth(List<PhysicalPerson> list)
-        {
-            InitializeComponent();
-            this.PhysicalPersonBindingSource.DataSource = list;
-        }
-
         private void FrmBornMonth_Load(object sender, EventArgs e)
         {
             this.reportViewer1.RefreshReport();

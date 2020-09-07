@@ -1,5 +1,4 @@
-﻿using LibCrud;
-using Microsoft.Reporting.WinForms;
+﻿using Microsoft.Reporting.WinForms;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -13,10 +12,9 @@ namespace CrudSharp
 {
     public partial class FrmAverageWaze : Form
     {
-        public FrmAverageWaze(List<PhysicalPerson> list)
+        public FrmAverageWaze()
         {
             InitializeComponent();
-            this.PhysicalPersonBindingSource.DataSource = list;
         }
 
         private void FrmSalaryRanger_Load(object sender, EventArgs e)

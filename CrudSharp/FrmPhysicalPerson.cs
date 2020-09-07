@@ -1,5 +1,4 @@
-﻿using LibCrud;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -12,10 +11,9 @@ namespace CrudSharp
 {
     public partial class FrmPhysicalPerson : Form
     {
-        public FrmPhysicalPerson(List<PhysicalPerson> list)
+        public FrmPhysicalPerson()
         {
             InitializeComponent();
-            this.PhysicalPersonBindingSource.DataSource = list;
         }
 
         private void FrmPhysicalPerson_Load(object sender, EventArgs e)

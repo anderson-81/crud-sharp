@@ -38,7 +38,6 @@
             // 
             // PhysicalPersonBindingSource
             // 
-            this.PhysicalPersonBindingSource.DataSource = typeof(LibCrud.PhysicalPerson);
             // 
             // reportViewer1
             // 

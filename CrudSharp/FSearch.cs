@@ -6,7 +6,6 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
-using LibCrud;
 
 namespace CrudSharp
 {
@@ -46,12 +45,8 @@ namespace CrudSharp
             {
                 if (this.txtDataSearch.Text != String.Empty)
                 {
-                    if (Crud.GetPhysicalPerson_ByID(Int32.Parse(this.txtDataSearch.Text.Trim())) != null)
+                    if (true)
                     {
-                        List<PhysicalPerson> lista = new List<PhysicalPerson>();
-                        lista.Add(Crud.GetPhysicalPerson_ByID(Int32.Parse(this.txtDataSearch.Text.Trim())));
-                        this.GridPhysicalPerson.DataSource = lista;
-                        this.GridPhysicalPerson.Visible = true;
                     }
                     else
                     {
@@ -64,8 +59,7 @@ namespace CrudSharp
             }
             else
             {
-                this.GridPhysicalPerson.DataSource = Crud.GetPhysicalPerson_ByName(this.txtDataSearch.Text.Trim());
-
+              
                 if (this.GridPhysicalPerson.RowCount > 0)
                 {
                     this.GridPhysicalPerson.Visible = true;
@@ -85,9 +79,6 @@ namespace CrudSharp
                 this.freg = new FrmRegistration();
             }
 
-            this.freg.option_clear = 1;
-            this.freg.SetPhysicalPerson(Int32.Parse(this.GridPhysicalPerson.SelectedRows[0].Cells[0].Value.ToString()), this.GridPhysicalPerson.SelectedRows[0].Cells[1].Value.ToString(), this.GridPhysicalPerson.SelectedRows[0].Cells[2].Value.ToString(), Decimal.Parse(this.GridPhysicalPerson.SelectedRows[0].Cells[3].Value.ToString()), DateTime.Parse(this.GridPhysicalPerson.SelectedRows[0].Cells[4].Value.ToString()),  this.GridPhysicalPerson.SelectedRows[0].Cells[5].Value.ToString()[0], this);
-            this.Visible = false;
 
             if (!this.freg.Visible)
             {

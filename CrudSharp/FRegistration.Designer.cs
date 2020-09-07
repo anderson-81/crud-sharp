@@ -74,8 +74,6 @@
             this.txtName.Name = "txtName";
             this.txtName.Size = new System.Drawing.Size(450, 29);
             this.txtName.TabIndex = 2;
-            this.txtName.Enter += new System.EventHandler(this.txtName_Enter);
-            this.txtName.Leave += new System.EventHandler(this.txtName_Leave);
             // 
             // txtEmail
             // 
@@ -84,9 +82,6 @@
             this.txtEmail.Name = "txtEmail";
             this.txtEmail.Size = new System.Drawing.Size(450, 29);
             this.txtEmail.TabIndex = 4;
-            this.txtEmail.Enter += new System.EventHandler(this.txtEmail_Enter);
-            this.txtEmail.Leave += new System.EventHandler(this.txtEmail_Leave);
-            this.txtEmail.Validated += new System.EventHandler(this.txtEmail_Validated);
             // 
             // lblEmail
             // 
@@ -104,9 +99,6 @@
             this.txtSalary.Name = "txtSalary";
             this.txtSalary.Size = new System.Drawing.Size(450, 29);
             this.txtSalary.TabIndex = 6;
-            this.txtSalary.TextChanged += new System.EventHandler(this.txtSalary_TextChanged);
-            this.txtSalary.Enter += new System.EventHandler(this.txtSalary_Enter);
-            this.txtSalary.Leave += new System.EventHandler(this.txtSalary_Leave);
             // 
             // lblSalary
             // 
@@ -165,7 +157,6 @@
             this.btnInsert.TabIndex = 12;
             this.btnInsert.Text = "Insert";
             this.btnInsert.UseVisualStyleBackColor = true;
-            this.btnInsert.Click += new System.EventHandler(this.btnInsert_Click);
             // 
             // btnSearch
             // 
@@ -175,7 +166,6 @@
             this.btnSearch.TabIndex = 13;
             this.btnSearch.Text = "Search";
             this.btnSearch.UseVisualStyleBackColor = true;
-            this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
             // 
             // btnEdit
             // 
@@ -185,7 +175,6 @@
             this.btnEdit.TabIndex = 14;
             this.btnEdit.Text = "Edit";
             this.btnEdit.UseVisualStyleBackColor = true;
-            this.btnEdit.Click += new System.EventHandler(this.btnEdit_Click);
             // 
             // btnDelete
             // 
@@ -195,7 +184,6 @@
             this.btnDelete.TabIndex = 15;
             this.btnDelete.Text = "Delete";
             this.btnDelete.UseVisualStyleBackColor = true;
-            this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
             // 
             // btnClear
             // 
@@ -205,7 +193,6 @@
             this.btnClear.TabIndex = 16;
             this.btnClear.Text = "Clear";
             this.btnClear.UseVisualStyleBackColor = true;
-            this.btnClear.Click += new System.EventHandler(this.btnClear_Click);
             // 
             // dtDateBirth
             // 
@@ -214,9 +201,6 @@
             this.dtDateBirth.Name = "dtDateBirth";
             this.dtDateBirth.Size = new System.Drawing.Size(250, 29);
             this.dtDateBirth.TabIndex = 17;
-            this.dtDateBirth.Enter += new System.EventHandler(this.dtDateBirth_Enter);
-            this.dtDateBirth.Leave += new System.EventHandler(this.dtDateBirth_Leave);
-            this.dtDateBirth.Validated += new System.EventHandler(this.dtDateBirth_Validated);
             // 
             // FrmRegistration
             // 
@@ -249,7 +233,6 @@
             this.Name = "FrmRegistration";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Registration";
-            this.Load += new System.EventHandler(this.FRegistration_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

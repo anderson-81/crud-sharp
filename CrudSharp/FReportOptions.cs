@@ -1,5 +1,4 @@
-﻿using LibCrud;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -188,102 +187,27 @@ namespace CrudSharp
 
         private void GenerateSalaryRangeReport()
         {
-            List<PhysicalPerson> list = Crud.GetPhysicalPerson_BySalaryRange(Decimal.Parse(txtInitialSal.Text.Trim()), Decimal.Parse(txtFinalInitial.Text.Trim()));
-            if (list.Count > 0)
-            {
-                FrmAverageWaze fsr = new FrmAverageWaze(list);
-                fsr.Show();
-            }
-            else
-            {
-                MessageBox.Show("No record with this criterion.", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            }
+           
         }
 
         private void GeneraterSalaryReport()
         {
-            List<PhysicalPerson> list = new List<PhysicalPerson>();
-
-            if (this.cmbSal.SelectedIndex == 0)
-            {
-                list.Add(Crud.GetPhysicalPerson_HigherSalary());
-            }
-
-            if (this.cmbSal.SelectedIndex == 1)
-            {
-                list.Add(Crud.GetPhysicalPerson_LowerSalary());
-            }
-
-            if (list != null)
-            {
-                FrmBySalary fsr = new FrmBySalary(list);
-                fsr.Show();
-            }
-            else
-            {
-                MessageBox.Show("No record with this criterion.", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            }
+          
         }
 
         private void GeneraterAverageWageReport()
         {
-            List<PhysicalPerson> list = null;
-
-            if (this.cmbAVG.SelectedIndex == 0)
-            {
-                list = Crud.GetPhysicalPerson_SalaryAboveAVG();
-            }
-
-            if (this.cmbAVG.SelectedIndex == 1)
-            {
-                list = Crud.GetPhysicalPerson_SalaryEqualAVG();
-            }
-
-            if (this.cmbAVG.SelectedIndex == 2)
-            {
-                list = Crud.GetPhysicalPerson_SalaryUnderAVG();
-            }
-
-
-            if (list != null)
-            {
-                FrmAverageWaze fsr = new FrmAverageWaze(list);
-                fsr.Show();
-            }
-            else
-            {
-                MessageBox.Show("No record with this criterion.", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            }
+           
         }
 
         private void GeneraterPhysicalPersonReport()
         {
-            List<PhysicalPerson> list = Crud.GetPhysicalPerson_ByName("");
-
-            if (list != null)
-            {
-                FrmPhysicalPerson fsr = new FrmPhysicalPerson(list);
-                fsr.Show();
-            }
-            else
-            {
-                MessageBox.Show("No record with this criterion.", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            }
+           
         }
 
         private void GeneraterBornMonth()
         {
-            List<PhysicalPerson> list = Crud.GetPhysicalPerson_ByBirthMonth(this.cmbMonth.SelectedIndex + 1);
             
-            if (list != null)
-            {
-                FrmBornMonth fsr = new FrmBornMonth(list);
-                fsr.Show();
-            }
-            else
-            {
-                MessageBox.Show("No record with this criterion.", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            }
         }
     }
 }

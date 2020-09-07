@@ -28,19 +28,16 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmSplash));
             this.SuspendLayout();
             // 
             // FrmSplash
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
-            this.ClientSize = new System.Drawing.Size(640, 360);
+            this.BackColor = System.Drawing.SystemColors.ControlDarkDark;
+            this.BackgroundImage = global::CrudSharp.Properties.Resources.back;
+            this.ClientSize = new System.Drawing.Size(624, 360);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
-            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.MaximumSize = new System.Drawing.Size(640, 360);
-            this.MinimumSize = new System.Drawing.Size(640, 360);
             this.Name = "FrmSplash";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "FSplash";
@@ -50,8 +47,5 @@
         }
 
         #endregion
-
-
-
     }
 }
