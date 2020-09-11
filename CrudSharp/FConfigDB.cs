@@ -146,7 +146,7 @@ namespace CrudSharp
                 {
                     if (CheckIfFieldIsEmpty())
                     {
-                        ConfigurationDatabase configDB = new ConfigurationDatabase(GetDatabaseName(), txtPath.Text, "", 0, "", "", "");
+                        ConfigurationDatabase configDB = new ConfigurationDatabase(GetDatabaseName(), @txtPath.Text, "", 0, "", "", "");
                         bool result = configDB.CreateConfiguration();
                         if (result)
                         {

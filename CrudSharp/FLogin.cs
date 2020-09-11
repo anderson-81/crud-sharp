@@ -44,10 +44,24 @@ namespace CrudSharp
 
         private void btnLogin_Click(object sender, EventArgs e)
         {
-            FrmPrincipal frmPrincipal = new FrmPrincipal(this);
-            this.Hide();
-            frmPrincipal.ShowDialog(this);
-            this.Close();
+            if((txtUsername.Text != string.Empty) && (txtPassword.Text != string.Empty))
+            {
+                if (Facade.FacadeInstance.Login(txtUsername.Text, txtPassword.Text) == 1)
+                {
+                    this.Hide();
+                    MessageBox.Show("Successfully logged.", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    FrmPrincipal frmPrincipal = new FrmPrincipal(this);
+                    frmPrincipal.ShowDialog(this);
+                }
+                else
+                {
+                    MessageBox.Show("Invalid Username and Password.", "Alert", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                }
+            }
+            else
+            {
+                MessageBox.Show("Username or Password is empty.", "Alert", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+            }
         }
 
         private bool CheckContainText(TextBox textBox, string text)

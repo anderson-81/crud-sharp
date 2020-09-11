@@ -65,11 +65,9 @@ namespace LibCrud
         public int Login()
         {
             IDbConnection conn = this._cmd.Connection;
-            conn.Open();
-
             try
             {
-                String cmdStr = "SELECT * FROM \"USER\" WHERE USERNAME = @USERNAME AND PASSWORD = @PASSWORD;";
+                String cmdStr = "SELECT * FROM USER WHERE USERNAME = @USERNAME AND PASSWORD = @PASSWORD;";
                 this._cmd.CommandText = cmdStr;
                 this.CreateParameters();
 
@@ -99,14 +97,13 @@ namespace LibCrud
         public int InsertUser()
         {
             IDbConnection conn = this._cmd.Connection;
-            conn.Open();
             this._cmd.Transaction = this._cmd.Connection.BeginTransaction(IsolationLevel.ReadCommitted);
             IDbTransaction trans = this._cmd.Transaction;
             log.SetLog("InsertUser", "Starting transaction.", DateTime.Now);
 
             try
             {
-                String cmdStr = "INSERT INTO \"USER\" VALUES(@USERNAME, @PASSWORD, @CREATEAT);";
+                String cmdStr = "INSERT INTO \"USER\" (USERNAME, PASSWORD, CREATEAT) VALUES(@USERNAME, @PASSWORD, @CREATEAT);";
                 this.CreateParameters();
                 this._cmd.CommandText = cmdStr;
                 this._cmd.ExecuteNonQuery();
@@ -127,7 +124,6 @@ namespace LibCrud
         public int DeletetUser()
         {
             IDbConnection conn = this._cmd.Connection;
-            conn.Open();
             this._cmd.Transaction = this._cmd.Connection.BeginTransaction(IsolationLevel.ReadCommitted);
             IDbTransaction trans = this._cmd.Transaction;
             log.SetLog("DeletetUser", "Starting transaction.", DateTime.Now);

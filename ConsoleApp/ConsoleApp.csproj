@@ -33,7 +33,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="LibCrud, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="LibCrud, Version=2.0.0.0, Culture=neutral, processorArchitecture=AMD64">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\LibCrud\bin\Debug\LibCrud.dll</HintPath>
     </Reference>
