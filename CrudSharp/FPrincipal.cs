@@ -11,18 +11,17 @@ namespace CrudSharp
 {
     public partial class FrmPrincipal : Form
     {
-        private FrmLogin fl;
+        private FrmLogin frmLogin;
         
         public FrmPrincipal()
         {
             InitializeComponent();
         }
 
-        public FrmPrincipal(FrmLogin fl)
+        public FrmPrincipal(FrmLogin frmLogin)
         {
             InitializeComponent();
-            this.fl = fl;
-            this.fl.Visible = false;
+            this.frmLogin = frmLogin;
             CreateStatusBar();
         }
 
@@ -33,7 +32,7 @@ namespace CrudSharp
 	        StatusBarPanel panel2 = new StatusBarPanel();
 
 	        panel1.BorderStyle = StatusBarPanelBorderStyle.Sunken;
-            panel1.Text = "User Logged:" + " " + fl.TxtUser.Text;
+            panel1.Text = "User Logged:" + " " + frmLogin.TxtUser.Text;
             panel1.Alignment = HorizontalAlignment.Left;
 	        panel1.AutoSize = StatusBarPanelAutoSize.Spring;
 

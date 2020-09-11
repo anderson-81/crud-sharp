@@ -47,8 +47,8 @@ namespace ConsoleApp
             }
             */
 
-            //TestConfiguration();
-            Test();
+            TestConfiguration();
+            //Test();
 
     
 
@@ -255,10 +255,13 @@ namespace ConsoleApp
             if (config.GetConnectionConfiguration() == null)
             {
                 //config = new ConfigurationDatabase(ConfigurationDatabase.DatabaseName.MySQL, "DbRegistration", "192.168.74.137", 3306, "anderson", "121181", "");
-                config = new ConfigurationDatabase(ConfigurationDatabase.DatabaseName.SQLite, "DbRegistration.db", "", 0, "", "", "");
-                //config = new ConfigurationDatabase(ConfigurationDatabase.DatabaseName.PostgreSQL, "DbRegistration", "192.168.74.137", 5432, "postgres", "121181", "");
+                //config = new ConfigurationDatabase(ConfigurationDatabase.DatabaseName.SQLite, "DbRegistration.db", "", 0, "", "", "");
+                config = new ConfigurationDatabase(ConfigurationDatabase.DatabaseName.PostgreSQL, "DbRegistration", "192.168.74.137", 5432, "postgres", "121181", "");
                 //config = new ConfigurationDatabase(ConfigurationDatabase.DatabaseName.SQLServer, "DbRegistration", "192.168.74.137", 1433, "anderson", "121181", "");
 
+
+
+                Console.WriteLine(config.CreateConfiguration());
 
                 Console.WriteLine("Successfully created.");
             }

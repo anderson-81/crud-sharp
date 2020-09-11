@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Xml.Serialization;
 
@@ -84,41 +85,40 @@ namespace LibCrud
             this.username = username;
             this.password = password;
             this.defaultSchema = defaultSchema;
-            this.CreateConfiguration();
         }
 
-        private bool CreateConfiguration()
+        public bool CreateConfiguration()
         {
-            if (!File.Exists("database.xml"))
+            log.SetLog("ValidateConfiguration", "Starting database configuration.", DateTime.Now);
+
+            if (this.ValidateConfiguration())
             {
-                log.SetLog("ValidateConfiguration", "Starting database configuration.", DateTime.Now);
-
-                if (this.ValidateConfiguration())
+                if (File.Exists("database.xml"))
                 {
-                    if (File.Exists("database.xml"))
-                    {
-                        File.Delete("database.xml");
-                    }
-
-                    TextWriter file = new StreamWriter("database.xml");
-
-                    XmlSerializer xmlSerial = new XmlSerializer(typeof(ConfigurationDatabase));
-
-                    xmlSerial.Serialize(file, this);
-
-                    file.Close();
-
-                    log.SetLog("CreateConfiguration", "Successfully created.", DateTime.Now);
-
-                    return true;
+                    File.Delete("database.xml");
                 }
+
+                TextWriter file = new StreamWriter("database.xml");
+
+                XmlSerializer xmlSerial = new XmlSerializer(typeof(ConfigurationDatabase));
+
+                xmlSerial.Serialize(file, this);
+
+                file.Close();
+
+                log.SetLog("CreateConfiguration", "Successfully created.", DateTime.Now);
+
+                return true;
             }
+
             return false;
         }
 
         private bool ValidateConfiguration()
         {
             bool result = true;
+
+            Regex regex = new Regex(@"^\S+\w{0,45}\S{1,}");
 
             #region PROVISORY
             if (string.IsNullOrEmpty(this.providerName))
@@ -132,7 +132,7 @@ namespace LibCrud
             }
             else
             {
-                if (this.database.Contains(" "))
+                if (!regex.IsMatch(this.database))
                 {
                     result = false;
                 }
@@ -146,7 +146,7 @@ namespace LibCrud
                 }
                 else
                 {
-                    if (this.username.Contains(" "))
+                    if (!regex.IsMatch(this.username))
                     {
                         result = false;
                     }
@@ -158,7 +158,7 @@ namespace LibCrud
                 }
                 else
                 {
-                    if (this.password.Contains(" "))
+                    if (!regex.IsMatch(this.password))
                     {
                         result = false;
                     }
@@ -191,16 +191,30 @@ namespace LibCrud
                 }
                 else
                 {
-                    if (this.hostname.Contains(" "))
+                    // Font: https://stackoverflow.com/questions/106179/regular-expression-to-match-dns-hostname-or-ip-address
+                    regex = new Regex(@"^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])$");
+                    if (!regex.IsMatch(this.hostname))
                     {
-                        result = false;
+                        regex = new Regex(@"^(([a-zA-Z0-9]|[a-zA-Z0-9][a-zA-Z0-9\-]*[a-zA-Z0-9])\.)*([A-Za-z0-9]|[A-Za-z0-9][A-Za-z0-9\-]*[A-Za-z0-9])$");
+                        if (!regex.IsMatch(this.hostname))
+                        {
+                            result = false;
+                        }
                     }
 
                     result = Uri.CheckHostName(this.hostname) != UriHostNameType.Basic;
                 }
+
+                if (!string.IsNullOrEmpty(this.defaultSchema))
+                {
+                    if (!regex.IsMatch(this.defaultSchema))
+                    {
+                        result = false;
+                    }
+                }
             }
 
-            if(result)
+            if (result)
             {
                 log.SetLog("ValidateConfiguration", "Successfully validated.", DateTime.Now);
             }
