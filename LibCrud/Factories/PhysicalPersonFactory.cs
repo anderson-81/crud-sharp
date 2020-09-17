@@ -29,7 +29,7 @@ namespace LibCrud
             this._birthday = birthday;
             this._gender = gender;
             this._comment = comment;
-            this._status = true;
+            this._status = status;
             this._createAt = DateTime.Now;
         }
 

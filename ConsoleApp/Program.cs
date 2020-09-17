@@ -48,8 +48,8 @@ namespace ConsoleApp
             */
 
             //TestConfiguration();
-            TestLogin();
-            //Test();
+            //TestLogin();
+            Test();
 
     
 

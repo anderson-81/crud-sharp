@@ -72,7 +72,6 @@ namespace LibCrud
 
                     lpf.Add(pf);
                 }
-                reader.Close();
                 SetLog("CreatePersonFacadeList", "Successfully created.", DateTime.Now);
             }
             catch (Exception)
@@ -148,25 +147,35 @@ namespace LibCrud
             try
             {
                 String cmdStr = "";
+                PersonFacade pf = null;
 
                 switch (optionIdentity)
                 {
                     case OptionIdentity.ID:
                         cmdStr = "SELECT * FROM PERSON INNER JOIN JURIDICALPERSON ON PERSON.ID = JURIDICALPERSON.PERSON_ID WHERE JURIDICALPERSON.ID = @ID;";
                         this.CreateUniqueParameter<int>("ID", this._jp.Id);
-                        SetLog("GetJuridicalPersonByIdentity", "Get PhysicalPerson By Identity (ID).", DateTime.Now);
+                        SetLog("GetJuridicalPersonByIdentity", "Get JuridicalPerson By Identity (ID).", DateTime.Now);
                         break;
                     case OptionIdentity.CNPJ:
                         cmdStr = "SELECT * FROM PERSON INNER JOIN JURIDICALPERSON ON PERSON.ID = JURIDICALPERSON.PERSON_ID WHERE JURIDICALPERSON.CNPJ = @CNPJ;";
                         this.CreateUniqueParameter<string>("CNPJ", this._jp.Cnpj);
-                        SetLog("GetJuridicalPersonByIdentity", "Get PhysicalPerson By Identity (CNPJ).", DateTime.Now);
+                        SetLog("GetJuridicalPersonByIdentity", "Get JuridicalPerson By Identity (CNPJ).", DateTime.Now);
                         break;
                 }
 
                 this.cmd.CommandType = CommandType.Text;
                 this.cmd.CommandText = cmdStr;
                 IDataReader reader = this.cmd.ExecuteReader();
-                PersonFacade pf = this.CreatePersonFacadeList(reader)[0];
+
+                try
+                {
+                    pf = this.CreatePersonFacadeList(reader)[0];
+                }
+                catch (Exception)
+                {
+                    pf = null;
+                }
+                
                 reader.Close();
                 this.cmd.Connection.Close();
                 SetLog("GetJuridicalPersonByIdentity", "Search performed successfully.", DateTime.Now);

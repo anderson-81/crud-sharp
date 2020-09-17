@@ -55,7 +55,9 @@ namespace LibCrud
             string sdate = "";
             if ((this.cmd.ToString() == "System.Data.SQLite.SQLiteCommand") || (this.cmd.ToString() == "MySql.Data.MySqlClient.MySqlCommand"))
             {
-                sdate = String.Format("{0}-{1}-{2}", date.Year, date.Month, date.Day);
+                string day = (date.Day < 10) ? "0" + date.Day.ToString() : date.Day.ToString();
+                string month = (date.Month < 10) ? "0" + date.Month.ToString() : date.Month.ToString();
+                sdate = String.Format("{0}-{1}-{2}", date.Year, month, day);
                 return sdate;
             }
             SetLog("FormatDateToDatabase", "", DateTime.Now);
@@ -76,7 +78,7 @@ namespace LibCrud
                 { "@CPF", this._pp.Cpf },
                 { "@SALARY", this._pp.Salary },
                 { "@BIRTHDAY", FormatDateToDatabase(this._pp.Birthday) },
-                { "@GENDER", this._pp.Gender }
+                { "@GENDER", (this._pp.Gender == 77) ? "M" : "F" }
             };
 
             foreach (var item in values)
@@ -86,7 +88,7 @@ namespace LibCrud
                 p.Value = item.Value;
                 this.cmd.Parameters.Add(p);
             }
-            
+
             SetLog("CreateParameters", "", DateTime.Now);
         }
         protected override List<PersonFacade> CreatePersonFacadeList(IDataReader reader)
@@ -97,9 +99,6 @@ namespace LibCrud
                 while (reader.Read())
                 {
                     PersonFacade pf = new PersonFacade();
-
-                    Console.WriteLine();
-
                     pf.Id = reader.GetInt32(0);
                     pf.Name = reader.GetString(1);
                     pf.Email = reader.GetString(2);
@@ -110,10 +109,8 @@ namespace LibCrud
                     pf.Salary = reader.GetDecimal(9);
                     pf.Birthday = reader.GetDateTime(10);
                     pf.Gender = reader.GetString(11)[0];
-
                     lpf.Add(pf);
                 }
-                reader.Close();
                 SetLog("CreatePersonFacadeList", "Successfully executed.", DateTime.Now);
             }
             catch (Exception)
@@ -302,7 +299,7 @@ namespace LibCrud
             try
             {
                 String cmdStr = "";
-
+                PersonFacade pf = null;
                 switch (optionIdentity)
                 {
                     case OptionIdentity.ID:
@@ -320,7 +317,14 @@ namespace LibCrud
                 this.cmd.CommandType = CommandType.Text;
                 this.cmd.CommandText = cmdStr;
                 IDataReader reader = this.cmd.ExecuteReader();
-                PersonFacade pf = this.CreatePersonFacadeList(reader)[0];
+                try
+                {
+                    pf = this.CreatePersonFacadeList(reader)[0];
+                }
+                catch (Exception)
+                {
+                    pf = null;
+                }
                 reader.Close();
                 this.cmd.Connection.Close();
                 SetLog("GetPhysicalPersonByIdentity", "Search performed successfully.", DateTime.Now);

@@ -60,7 +60,7 @@ namespace LibCrud
                         break;
                     case DatabaseName.SQLite:
                         _conn = new SQLiteConnection();
-                        _conn.ConnectionString = String.Format("Data Source={0};Version=3;", config.database);
+                        _conn.ConnectionString = String.Format("Data Source={0};Version=3;Pooling=True;Max Pool Size=100;;Synchronous=Off;", config.database);
 
                         #region PROVISORY
                         if (!File.Exists(config.database))

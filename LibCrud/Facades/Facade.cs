@@ -397,7 +397,7 @@ namespace LibCrud
         #region PhysicalPerson
         public object InsertPhysicalPerson(string cpf, string name, string email, decimal salary, DateTime birthday, char gender, string comment, bool status)
         {
-            _pf = new PhysicalPersonFactory(0, cpf, name, email, salary, birthday, gender, comment, true);
+            _pf = new PhysicalPersonFactory(0, cpf, name, email, salary, birthday, gender, comment, status);
             PhysicalPerson pp = (PhysicalPerson)_pf.GetPerson();
             this.ValidationPhysicalPerson(pp);
             if (string.IsNullOrEmpty(_errors))

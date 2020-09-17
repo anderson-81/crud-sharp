@@ -83,20 +83,20 @@
             this.registrationToolStripMenuItem1,
             this.searchToolStripMenuItem});
             this.physicalPersonToolStripMenuItem.Name = "physicalPersonToolStripMenuItem";
-            this.physicalPersonToolStripMenuItem.Size = new System.Drawing.Size(156, 22);
-            this.physicalPersonToolStripMenuItem.Text = "Physical Person";
+            this.physicalPersonToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.physicalPersonToolStripMenuItem.Text = "Person";
             // 
             // registrationToolStripMenuItem1
             // 
             this.registrationToolStripMenuItem1.Name = "registrationToolStripMenuItem1";
-            this.registrationToolStripMenuItem1.Size = new System.Drawing.Size(137, 22);
+            this.registrationToolStripMenuItem1.Size = new System.Drawing.Size(152, 22);
             this.registrationToolStripMenuItem1.Text = "Registration";
             this.registrationToolStripMenuItem1.Click += new System.EventHandler(this.registrationToolStripMenuItem1_Click);
             // 
             // searchToolStripMenuItem
             // 
             this.searchToolStripMenuItem.Name = "searchToolStripMenuItem";
-            this.searchToolStripMenuItem.Size = new System.Drawing.Size(137, 22);
+            this.searchToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.searchToolStripMenuItem.Text = "Search";
             this.searchToolStripMenuItem.Click += new System.EventHandler(this.searchToolStripMenuItem_Click);
             // 

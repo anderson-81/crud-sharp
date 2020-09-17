@@ -12,6 +12,9 @@ namespace CrudSharp
     public partial class FrmPrincipal : Form
     {
         private FrmLogin frmLogin;
+        private FrmReportOptions fro = null;
+        private FrmRegistration frm = null;
+        private FrmSearch fs = null;
         
         public FrmPrincipal()
         {
@@ -56,13 +59,13 @@ namespace CrudSharp
 
         private void registrationToolStripMenuItem1_Click(object sender, EventArgs e)
         {
-            FrmRegistration frm = new FrmRegistration();
+            frm = new FrmRegistration();
             frm.ShowDialog(this);
         }
 
         private void searchToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            FrmSearch fs = new FrmSearch();
+            fs = new FrmSearch();
             fs.ShowDialog(this);
         }
     
@@ -72,9 +75,9 @@ namespace CrudSharp
             {
                 this.notifyIcon.BalloonTipIcon = System.Windows.Forms.ToolTipIcon.Info; //Shows the info icon so the user doesn't thing there is an error.
                 this.notifyIcon.BalloonTipText = "The system is still active.";
-                this.notifyIcon.BalloonTipTitle = "Registration System";
+                this.notifyIcon.BalloonTipTitle = "Registration System 2.0-beta";
                 this.notifyIcon.Icon = new Icon("../../gear.ico");
-                this.notifyIcon.Text = "Registration System";
+                this.notifyIcon.Text = "Registration System 2.0-beta";
                 notifyIcon.ShowBalloonTip(3000);
             }
         }
@@ -107,7 +110,7 @@ namespace CrudSharp
 
         private void reportToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            FrmReportOptions fro = new FrmReportOptions();
+            fro = new FrmReportOptions();
             fro.ShowDialog(this);
         }
     }
