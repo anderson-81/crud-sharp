@@ -1,6 +1,6 @@
 ﻿namespace CrudSharp
 {
-    partial class FrmAverageWaze
+    partial class FrmReport
     {
         /// <summary>
         /// Required designer variable.
@@ -30,55 +30,46 @@
         {
             this.components = new System.ComponentModel.Container();
             Microsoft.Reporting.WinForms.ReportDataSource reportDataSource1 = new Microsoft.Reporting.WinForms.ReportDataSource();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmAverageWaze));
-            this.PhysicalPersonBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmReport));
+            this.PersonFacadeBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.reportViewer = new Microsoft.Reporting.WinForms.ReportViewer();
-            this.physicalPersonSource = new System.Windows.Forms.BindingSource(this.components);
-            ((System.ComponentModel.ISupportInitialize)(this.PhysicalPersonBindingSource)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.physicalPersonSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PersonFacadeBindingSource)).BeginInit();
             this.SuspendLayout();
-            // 
-            // PhysicalPersonBindingSource
-            // 
             // 
             // reportViewer
             // 
-            this.reportViewer.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.reportViewer.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.reportViewer.IsDocumentMapWidthFixed = true;
             reportDataSource1.Name = "DSPhysicalPerson";
-            reportDataSource1.Value = this.PhysicalPersonBindingSource;
+            reportDataSource1.Value = this.PersonFacadeBindingSource;
             this.reportViewer.LocalReport.DataSources.Add(reportDataSource1);
             this.reportViewer.LocalReport.ReportEmbeddedResource = "CrudSharp.RpSalaryRange.rdlc";
             this.reportViewer.Location = new System.Drawing.Point(0, 0);
+            this.reportViewer.Margin = new System.Windows.Forms.Padding(0);
             this.reportViewer.Name = "reportViewer";
-            this.reportViewer.Size = new System.Drawing.Size(584, 362);
+            this.reportViewer.Size = new System.Drawing.Size(1044, 731);
             this.reportViewer.TabIndex = 0;
-            this.reportViewer.UseWaitCursor = true;
+            this.reportViewer.ZoomPercent = 150;
             // 
-            // FrmAverageWaze
+            // FrmReport
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.ClientSize = new System.Drawing.Size(584, 362);
+            this.ClientSize = new System.Drawing.Size(1044, 731);
             this.Controls.Add(this.reportViewer);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Name = "FrmAverageWaze";
+            this.Name = "FrmReport";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Report by Salary Range";
-            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
-            this.Load += new System.EventHandler(this.FrmSalaryRanger_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.PhysicalPersonBindingSource)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.physicalPersonSource)).EndInit();
+            this.Text = "Report";
+            this.Load += new System.EventHandler(this.FrmReport_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.PersonFacadeBindingSource)).EndInit();
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
+        private System.Windows.Forms.BindingSource PersonFacadeBindingSource;
         private Microsoft.Reporting.WinForms.ReportViewer reportViewer;
-        private System.Windows.Forms.BindingSource physicalPersonSource;
-        private System.Windows.Forms.BindingSource PhysicalPersonBindingSource;
     }
 }

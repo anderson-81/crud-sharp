@@ -449,7 +449,12 @@ namespace LibCrud
                 }
 
                 this.cmd.CommandText = cmdStr;
-                this.CreateUniqueParameter<string>("MONTH", month.ToString());
+                string fmonth = "";
+                if (month < 10)
+                    fmonth = 0 + month.ToString();
+                else
+                    fmonth = month.ToString();
+                this.CreateUniqueParameter<string>("MONTH", fmonth);
                 IDataReader reader = this.cmd.ExecuteReader();
                 List<PersonFacade> list = this.CreatePersonFacadeList(reader);
                 reader.Close();

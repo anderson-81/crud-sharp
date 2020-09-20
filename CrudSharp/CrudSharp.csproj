@@ -105,35 +105,11 @@
     <Compile Include="FReportOptions.Designer.cs">
       <DependentUpon>FReportOptions.cs</DependentUpon>
     </Compile>
-    <Compile Include="FrmAVGWaze.cs">
+    <Compile Include="FReport.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="FrmAVGWaze.Designer.cs">
-      <DependentUpon>FrmAVGWaze.cs</DependentUpon>
-    </Compile>
-    <Compile Include="FrmBornMonth.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="FrmBornMonth.Designer.cs">
-      <DependentUpon>FrmBornMonth.cs</DependentUpon>
-    </Compile>
-    <Compile Include="FrmBySalary.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="FrmBySalary.Designer.cs">
-      <DependentUpon>FrmBySalary.cs</DependentUpon>
-    </Compile>
-    <Compile Include="FrmPhysicalPerson.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="FrmPhysicalPerson.Designer.cs">
-      <DependentUpon>FrmPhysicalPerson.cs</DependentUpon>
-    </Compile>
-    <Compile Include="FrmSalaryRanger.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="FrmSalaryRanger.Designer.cs">
-      <DependentUpon>FrmSalaryRanger.cs</DependentUpon>
+    <Compile Include="FReport.Designer.cs">
+      <DependentUpon>FReport.cs</DependentUpon>
     </Compile>
     <Compile Include="FSearch.cs">
       <SubType>Form</SubType>
@@ -160,6 +136,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Reports\ReportDesignData.cs" />
     <EmbeddedResource Include="FConfigDB.resx">
       <DependentUpon>FConfigDB.cs</DependentUpon>
     </EmbeddedResource>
@@ -175,20 +152,8 @@
     <EmbeddedResource Include="FReportOptions.resx">
       <DependentUpon>FReportOptions.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="FrmAVGWaze.resx">
-      <DependentUpon>FrmAVGWaze.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="FrmBornMonth.resx">
-      <DependentUpon>FrmBornMonth.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="FrmBySalary.resx">
-      <DependentUpon>FrmBySalary.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="FrmPhysicalPerson.resx">
-      <DependentUpon>FrmPhysicalPerson.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="FrmSalaryRanger.resx">
-      <DependentUpon>FrmSalaryRanger.cs</DependentUpon>
+    <EmbeddedResource Include="FReport.resx">
+      <DependentUpon>FReport.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FSearch.resx">
       <DependentUpon>FSearch.cs</DependentUpon>
@@ -203,11 +168,12 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="RpPhysicalPerson.rdlc" />
-    <EmbeddedResource Include="RpByMonth.rdlc" />
-    <EmbeddedResource Include="RpBySalary.rdlc" />
-    <EmbeddedResource Include="RpAverageWage.rdlc" />
-    <EmbeddedResource Include="RpSalaryRange.rdlc" />
+    <EmbeddedResource Include="Reports\RpJuridicalPerson.rdlc" />
+    <EmbeddedResource Include="Reports\RpPhysicalPerson.rdlc" />
+    <EmbeddedResource Include="Reports\RpAverageWage.rdlc" />
+    <EmbeddedResource Include="Reports\RpSalaryRange.rdlc" />
+    <EmbeddedResource Include="Reports\RpBySalary.rdlc" />
+    <EmbeddedResource Include="Reports\RpByMonth.rdlc" />
     <None Include="app.config" />
   </ItemGroup>
   <ItemGroup>
