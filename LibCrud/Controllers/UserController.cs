@@ -1,6 +1,9 @@
-﻿using System;
+﻿using LibCrud.Configs;
+using LibCrud.Facades;
+using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Diagnostics;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
@@ -13,7 +16,8 @@ namespace LibCrud
         #region Attributes
         private User _user;
         protected IDbCommand _cmd = ConnectionFactory.getInstance().getConnection().CreateCommand();
-        private Log log = Log.GetLogInstance;
+        private Log _log = Log.GetLogInstance;
+        private Format format = new Format();
         #endregion
 
         #region Constructor
@@ -23,31 +27,36 @@ namespace LibCrud
         }
         #endregion
 
-        #region Format
-        private String GenerateHASH(string source)
-        {
-            using (SHA512 sha512Hash = SHA512.Create())
-            {
-                byte[] sourceBytes = Encoding.UTF8.GetBytes(source);
-                byte[] hashBytes = sha512Hash.ComputeHash(sourceBytes);
-                log.SetLog("GenerateHASH", "Hash generated successfully.", DateTime.Now);
-                return BitConverter.ToString(hashBytes).Replace("-", String.Empty).ToLower();
-            }
-        }
-        #endregion
-
         #region CreateParameters
         private void CreateParameters()
         {
-            List<string> parameters = new List<string>() { "@ID", "@USERNAME", "@PASSWORD", "@CREATEAT" };
+            List<string> parameters = new List<string>() { "@ID", "@USERNAME", "@PASSWORD", "@TYPEUSER", "@CREATEAT" };
+            Dictionary<string, object> values = null;
 
-            Dictionary<string, object> values = new Dictionary<string, object>()
+            if (new StackTrace().GetFrame(1).GetMethod().Name == "GetUserByName")
             {
-                { "@ID", this._user.Id },
-                { "@USERNAME", GenerateHASH(this._user.Username) },
-                { "@PASSWORD", GenerateHASH(this._user.Password) },
-                { "@CREATEAT", DateTime.Now }
-            };
+                values = new Dictionary<string, object>()
+                {
+                    { "@ID", this._user.Id },
+                    { "@NAME", this._user.Name },
+                    { "@USERNAME", this._user.Username },
+                    { "@PASSWORD", this._user.Password },
+                    { "@TYPEUSER", (this._user.UserType == User.UserTypeOption.Administrator) ? 1 : 0 },
+                    { "@CREATEAT", DateTime.Now }
+                };
+            }
+            else
+            {
+                values = new Dictionary<string, object>()
+                {
+                    { "@ID", this._user.Id },
+                    { "@NAME", this._user.Name },
+                    { "@USERNAME", format.GenerateHASH(this._user.Username) },
+                    { "@PASSWORD", format.GenerateHASH(this._user.Password) },
+                    { "@TYPEUSER", (this._user.UserType == User.UserTypeOption.Administrator) ? 1 : 0 },
+                    { "@CREATEAT", DateTime.Now }
+                };
+            }
 
             foreach (var item in values)
             {
@@ -57,9 +66,46 @@ namespace LibCrud
                 this._cmd.Parameters.Add(p);
             }
 
-            log.SetLog("CreateParameters", "", DateTime.Now);
+            SetLog("CreateParameters", "", DateTime.Now);
+        }
+
+        private void CreateUniqueParameter<T>(string parameterName, T parameterValue)
+        {
+            this._cmd.Parameters.Clear();
+            IDbDataParameter p = this._cmd.CreateParameter();
+            p.ParameterName = "@" + parameterName;
+            p.Value = parameterValue;
+            this._cmd.Parameters.Add(p);
+
+            SetLog("CreateUniqueParameter", "", DateTime.Now);
         }
         #endregion
+
+        protected List<UserFacade> CreateUserFacadeList(IDataReader reader)
+        {
+            List<UserFacade> listUser = new List<UserFacade>();
+            try
+            {
+                while (reader.Read())
+                {
+                    UserFacade user = new UserFacade();
+                    user.Id = reader.GetInt32(0);
+                    user.Name = reader.GetString(1);
+                    user.Username = reader.GetString(2);
+                    user.Password = reader.GetString(3);
+                    user.UserType = reader.GetInt32(4);
+                    user.CreateAt = reader.GetDateTime(5);
+                    listUser.Add(user);
+                }
+                SetLog("CreateUserFacadeList", "Successfully executed.", DateTime.Now);
+                return listUser;
+            }
+            catch (Exception)
+            {
+                SetLog("CreateUserFacadeList", "Error creating.", DateTime.Now);
+                return null;
+            }
+        }
 
         #region Login and Transactions
         public int Login()
@@ -67,7 +113,7 @@ namespace LibCrud
             IDbConnection conn = this._cmd.Connection;
             try
             {
-                String cmdStr = "SELECT * FROM USER WHERE USERNAME = @USERNAME AND PASSWORD = @PASSWORD;";
+                String cmdStr = "SELECT * FROM USER WHERE USERNAME = @USERNAME AND PASSWORD = @PASSWORD AND TYPEUSER = @TYPEUSER;";
                 this._cmd.CommandText = cmdStr;
                 this.CreateParameters();
 
@@ -76,20 +122,20 @@ namespace LibCrud
                     if (((System.Data.Common.DbDataReader)IReader).HasRows)
                     {
                         conn.Close();
-                        log.SetLog("Login", "Successfully Login.", DateTime.Now);
+                        SetLog("Login", "Successfully Login.", DateTime.Now);
                         return 1;
                     }
                     else
                     {
                         conn.Close();
-                        log.SetLog("Login", "Invalid username and password.", DateTime.Now);
+                        SetLog("Login", "Invalid username and password.", DateTime.Now);
                         return 0;
                     }
                 }
             }
             catch (Exception)
             {
-                log.SetLog("Login", "Error logging in.", DateTime.Now);
+                SetLog("Login", "Error logging in.", DateTime.Now);
                 return -1;
             }
         }
@@ -99,24 +145,52 @@ namespace LibCrud
             IDbConnection conn = this._cmd.Connection;
             this._cmd.Transaction = this._cmd.Connection.BeginTransaction(IsolationLevel.ReadCommitted);
             IDbTransaction trans = this._cmd.Transaction;
-            log.SetLog("InsertUser", "Starting transaction.", DateTime.Now);
+            SetLog("InsertUser", "Starting transaction.", DateTime.Now);
 
             try
             {
-                String cmdStr = "INSERT INTO \"USER\" (USERNAME, PASSWORD, CREATEAT) VALUES(@USERNAME, @PASSWORD, @CREATEAT);";
+                String cmdStr = "INSERT INTO \"USER\" (NAME, USERNAME, PASSWORD, TYPEUSER, CREATEAT) VALUES(@NAME, @USERNAME, @PASSWORD, @TYPEUSER, @CREATEAT);";
                 this.CreateParameters();
                 this._cmd.CommandText = cmdStr;
                 this._cmd.ExecuteNonQuery();
                 trans.Commit();
-                log.SetLog("InsertUser", "Commit transaction.", DateTime.Now);
+                SetLog("InsertUser", "Commit transaction.", DateTime.Now);
                 conn.Close();
-                log.SetLog("InsertUser", "Successfully inserted.", DateTime.Now);
+                SetLog("InsertUser", "Successfully inserted.", DateTime.Now);
                 return 1;
             }
             catch (Exception)
             {
                 trans.Rollback();
-                log.SetLog("InsertUser", "Rollback transaction.", DateTime.Now);
+                SetLog("InsertUser", "Rollback transaction.", DateTime.Now);
+                return -1;
+            }
+        }
+
+        public int EditUser()
+        {
+            this._cmd.Connection = ConnectionFactory.getInstance().getConnection();
+            IDbConnection conn = this._cmd.Connection;
+            this._cmd.Transaction = this._cmd.Connection.BeginTransaction(IsolationLevel.ReadCommitted);
+            IDbTransaction trans = this._cmd.Transaction;
+            SetLog("EditUser", "Starting transaction.", DateTime.Now);
+
+            try
+            {
+                String cmdStr = "UPDATE \"USER\" SET NAME = @NAME, USERNAME = @USERNAME, PASSWORD = @PASSWORD, TYPEUSER = @TYPEUSER WHERE ID = @ID;";
+                this.CreateParameters();
+                this._cmd.CommandText = cmdStr;
+                this._cmd.ExecuteNonQuery();
+                trans.Commit();
+                SetLog("EditUser", "Commit transaction.", DateTime.Now);
+                conn.Close();
+                SetLog("EditUser", "Successfully edited.", DateTime.Now);
+                return 1;
+            }
+            catch (Exception)
+            {
+                trans.Rollback();
+                SetLog("EditUser", "Rollback transaction.", DateTime.Now);
                 return -1;
             }
         }
@@ -126,27 +200,87 @@ namespace LibCrud
             IDbConnection conn = this._cmd.Connection;
             this._cmd.Transaction = this._cmd.Connection.BeginTransaction(IsolationLevel.ReadCommitted);
             IDbTransaction trans = this._cmd.Transaction;
-            log.SetLog("DeletetUser", "Starting transaction.", DateTime.Now);
+            SetLog("DeletetUser", "Starting transaction.", DateTime.Now);
 
             try
             {
                 String cmdStr = "DELETE FROM \"USER\" WHERE ID = @ID;";
-                this.CreateParameters();
+                this.CreateUniqueParameter<int>("ID", _user.Id);
                 this._cmd.CommandText = cmdStr;
                 this._cmd.ExecuteNonQuery();
                 trans.Commit();
-                log.SetLog("DeletetUser", "Commit transaction.", DateTime.Now);
+                SetLog("DeletetUser", "Commit transaction.", DateTime.Now);
                 conn.Close();
-                log.SetLog("DeletetUser", "Successfully deleted.", DateTime.Now);
+                SetLog("DeletetUser", "Successfully deleted.", DateTime.Now);
                 return 1;
             }
             catch (Exception)
             {
                 trans.Rollback();
                 conn.Close();
-                log.SetLog("DeletetUser", "Error deleting.", DateTime.Now);
+                SetLog("DeletetUser", "Error deleting.", DateTime.Now);
                 return -1;
             }
+        }
+
+        public UserFacade GetUserByID()
+        {
+            IDbConnection conn = this._cmd.Connection;
+            try
+            {
+                UserFacade userFacade = null;
+                String cmdStr = "SELECT * FROM USER WHERE ID = @ID;";
+                this._cmd.CommandText = cmdStr;
+                this.CreateUniqueParameter<int>("ID", _user.Id);
+                IDataReader reader = this._cmd.ExecuteReader();
+                try
+                {
+                    userFacade = this.CreateUserFacadeList(reader)[0];
+                }
+                catch (Exception)
+                {
+                    userFacade = null;
+                }
+                SetLog("GetUserByID", "Search performed successfully.", DateTime.Now);
+                reader.Close();
+                _cmd.Connection.Close();
+                return userFacade;
+            }
+            catch (Exception)
+            {
+                SetLog("GetUserByID", "Error logging in.", DateTime.Now);
+                return null;
+            }
+        }
+
+        public List<UserFacade> GetUserByName()
+        {
+            IDbConnection conn = this._cmd.Connection;
+            try
+            {
+                List<UserFacade> list = null;
+                String cmdStr = "SELECT * FROM USER WHERE USERNAME LIKE @USERNAME;";
+                this._cmd.CommandText = cmdStr;
+                this.CreateUniqueParameter<string>("USERNAME", this._user.Username + '%');
+                IDataReader reader = this._cmd.ExecuteReader();
+                list = this.CreateUserFacadeList(reader);
+                SetLog("GetUserByName", "Search performed successfully.", DateTime.Now);
+                reader.Close();
+                _cmd.Connection.Close();
+                return list;
+            }
+            catch (Exception)
+            {
+                SetLog("GetUserByName", "xxxxxxxxx.", DateTime.Now);
+                return null;
+            }
+        }
+        #endregion
+
+        #region Log
+        protected void SetLog(string method, string result, DateTime datetime)
+        {
+            _log.SetLog(method, result, datetime);
         }
         #endregion
     }

@@ -70,7 +70,7 @@ namespace LibCrud
             }
             catch (Exception)
             {
-                return false;
+                throw;
             }
         }
         #endregion

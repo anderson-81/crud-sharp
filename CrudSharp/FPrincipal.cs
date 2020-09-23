@@ -113,5 +113,11 @@ namespace CrudSharp
             fro = new FrmReportOptions();
             fro.ShowDialog(this);
         }
+
+        private void manageUsersToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FrmUser frmUser = new FrmUser();
+            frmUser.ShowDialog(this);
+        }
     }
 }

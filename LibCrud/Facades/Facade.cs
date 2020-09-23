@@ -1,4 +1,6 @@
-﻿using System;
+﻿using LibCrud.Configs;
+using LibCrud.Facades;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
@@ -17,7 +19,6 @@ namespace LibCrud
         private User _user;
         private string _errors = "";
         private Log _log = Log.GetLogInstance;
-        
 
         public enum OptionPerson
         {
@@ -42,6 +43,12 @@ namespace LibCrud
         {
             Male,
             Female
+        }
+
+        public enum UserType
+        {
+            Administrator,
+            User
         }
         #endregion
 
@@ -394,6 +401,64 @@ namespace LibCrud
         }
         #endregion
 
+        #region Validation (User)
+        private void ValidationUser(User user)
+        {
+            _errors = "";
+            bool vusername = false;
+            Format format = new Format();
+            FacadeValidationData validation = FacadeValidationData.GetInstance;
+
+            if (validation.CheckIfNotIsNullOrEmpty(user.Username))
+            {
+                if (validation.CheckStringSize(user.Username, 3, 45))
+                {
+                    if (new StackTrace().GetFrame(1).GetMethod().Name == "EditUser")
+                    {
+                        UserFacade userFacade = _uc.GetUserByID();
+                        if (userFacade != null)
+                        {
+                            vusername = (format.GenerateHASH(user.Username) != userFacade.Username);
+                        }
+                    }
+                    else
+                    {
+                        vusername = true;
+                    }
+
+                    if (vusername)
+                    {
+                        if (validation.CheckIfExistInDatabase<string>("USER", "USERNAME", format.GenerateHASH(user.Username)))
+                        {
+                            SetError("Username already registered.");
+                        }
+                    }
+                }
+                else
+                {
+                    SetError("Invalid character quantity for username.");
+                }
+            }
+            else
+            {
+                SetError("Username is empty.");
+            }
+
+            if (validation.CheckIfNotIsNullOrEmpty(user.Password))
+            {
+                if (!validation.CheckStringSize(user.Password, 3, 45))
+                {
+                    SetError("Invalid character quantity for password.");
+                }
+            }
+            else
+            {
+                SetError("Password is empty.");
+            }
+        }
+
+        #endregion
+
         #region PhysicalPerson
         public object InsertPhysicalPerson(string cpf, string name, string email, decimal salary, DateTime birthday, char gender, string comment, bool status)
         {
@@ -594,24 +659,88 @@ namespace LibCrud
         #endregion
 
         #region User
-        public int Login(String username, String password)
+        public int Login(String username, String password, UserType userType)
         {
             _user = new User();
             _user.Username = username;
             _user.Password = password;
+
+            switch (userType)
+            {
+                case UserType.Administrator:
+                    _user.UserType = User.UserTypeOption.Administrator;
+                    break;
+                case UserType.User:
+                    _user.UserType = User.UserTypeOption.User;
+                    break;
+            }
+
             _uc = new UserController(_user);
             return _uc.Login();
         }
-        public int InsertUser(String username, String password)
+
+        public List<UserFacade> GetUserByName(String username)
         {
             _user = new User();
             _user.Username = username;
-            _user.Password = password;
             _uc = new UserController(_user);
-            return _uc.InsertUser();
+            return _uc.GetUserByName();
         }
 
-        public int DeleteUser(int id)
+        public object InsertUser(string name, string username, string password, UserType userType)
+        {
+            _user = new User();
+            _user.Name = name;
+            _user.Username = username;
+            _user.Password = password;
+
+            switch (userType)
+            {
+                case UserType.Administrator:
+                    _user.UserType = User.UserTypeOption.Administrator;
+                    break;
+                case UserType.User:
+                    _user.UserType = User.UserTypeOption.User;
+                    break;
+            }
+
+            ValidationUser(_user);
+            if (string.IsNullOrEmpty(_errors))
+            {
+                _uc = new UserController(_user);
+                return _uc.InsertUser();
+            }
+            return _errors;
+        }
+
+        public object EditUser(int id, string name, string username, string password, UserType userType)
+        {
+            _user = new User();
+            _user.Id = id;
+            _user.Name = name;
+            _user.Username = username;
+            _user.Password = password;
+
+            switch (userType)
+            {
+                case UserType.Administrator:
+                    _user.UserType = User.UserTypeOption.Administrator;
+                    break;
+                case UserType.User:
+                    _user.UserType = User.UserTypeOption.User;
+                    break;
+            }
+
+            _uc = new UserController(_user);
+            ValidationUser(_user);
+            if (string.IsNullOrEmpty(_errors))
+            {
+                return _uc.EditUser();
+            }
+            return _errors;
+        }
+
+        public object DeleteUser(int id)
         {
             _user = new User();
             _user.Id = id;

@@ -19,24 +19,27 @@ namespace CrudSharp
         public FrmLogin()
         {
             InitializeComponent();
+            this.cmbTypeUser.SelectedIndex = 0;
         }
 
         public FrmLogin(FrmSplash frmSplash)
         {
             InitializeComponent();
             this.frmSplash = frmSplash;
+            this.cmbTypeUser.SelectedIndex = 0;
         }
 
         public FrmLogin(FrmConfigDB frmConfigDB)
         {
             InitializeComponent();
             this.frmConfigDB = frmConfigDB;
+            this.cmbTypeUser.SelectedIndex = 0;
         }
 
         private void btnCancel_Click(object sender, EventArgs e)
         {
             DialogResult dialogResult = MessageBox.Show("Do you want exit?", "Question", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-            if(dialogResult == System.Windows.Forms.DialogResult.Yes)
+            if (dialogResult == System.Windows.Forms.DialogResult.Yes)
             {
                 this.Close();
             }
@@ -44,9 +47,9 @@ namespace CrudSharp
 
         private void btnLogin_Click(object sender, EventArgs e)
         {
-            if((txtUsername.Text != string.Empty) && (txtPassword.Text != string.Empty))
+            if ((txtUsername.Text != string.Empty) && (txtPassword.Text != string.Empty))
             {
-                if (Facade.FacadeInstance.Login(txtUsername.Text, txtPassword.Text) == 1)
+                if (Facade.FacadeInstance.Login(txtUsername.Text, txtPassword.Text, ((cmbTypeUser.SelectedIndex == 0) ? Facade.UserType.User : Facade.UserType.Administrator)) == 1)
                 {
                     this.Hide();
                     MessageBox.Show("Successfully logged.", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -107,6 +110,7 @@ namespace CrudSharp
         {
             ConfigurationDatabase configDB = new ConfigurationDatabase();
             this.btnLogin.Enabled = (configDB.GetConnectionConfiguration() != null);
+            cmbTypeUser.SelectedIndex = 1;
         }
     }
 }

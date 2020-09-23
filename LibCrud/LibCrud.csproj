@@ -145,6 +145,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Configs\ConfigurationDatabase.cs" />
+    <Compile Include="Configs\Format.cs" />
+    <Compile Include="Facades\UserFacade.cs" />
     <Compile Include="Factories\ConnectionFactory.cs" />
     <Compile Include="Facades\Facade.cs" />
     <Compile Include="Controllers\JuridicalPersonController.cs" />
