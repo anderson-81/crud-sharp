@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Diagnostics;
 using System.Drawing;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
@@ -143,6 +144,33 @@ namespace CrudSharp
         {
             FrmLog frmLog = new FrmLog();
             frmLog.ShowDialog(this);
+        }
+
+        private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FrmAbout frmAbout = new FrmAbout();
+            frmAbout.ShowDialog(this);
+        }
+
+        private void viewHelpToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            string path = @"help/help.chm";
+            try
+            {
+                if (File.Exists(path))
+                {
+                    FileInfo fileInfo = new FileInfo(path);
+                    Process.Start(fileInfo.FullName);  
+                }
+                else
+                {
+                    MessageBox.Show("Not found help file.", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Error opening help file", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
     }
 }
