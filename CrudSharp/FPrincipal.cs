@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -15,7 +16,9 @@ namespace CrudSharp
         private FrmReportOptions fro = null;
         private FrmRegistration frm = null;
         private FrmSearch fs = null;
-        
+        private string _typeUser = "";
+
+
         public FrmPrincipal()
         {
             InitializeComponent();
@@ -25,31 +28,47 @@ namespace CrudSharp
         {
             InitializeComponent();
             this.frmLogin = frmLogin;
+            SetActionsByUserType(frmLogin.CmbTypeUser.SelectedIndex);
             CreateStatusBar();
+        }
+
+        private void SetActionsByUserType(int index)
+        {
+            switch (index)
+            {
+                case 1:
+                    _typeUser = "Administrator";
+                    this.administrationToolStripMenuItem.Visible = true;
+                    break;
+                case 0:
+                    _typeUser = "User";
+                    this.administrationToolStripMenuItem.Visible = false;
+                    break;
+            }
         }
 
         public void CreateStatusBar()
         {
             StatusBar statusBar1 = new StatusBar();
-	        StatusBarPanel panel1 = new StatusBarPanel();
-	        StatusBarPanel panel2 = new StatusBarPanel();
+            StatusBarPanel panel1 = new StatusBarPanel();
+            StatusBarPanel panel2 = new StatusBarPanel();
 
-	        panel1.BorderStyle = StatusBarPanelBorderStyle.Sunken;
-            panel1.Text = "User Logged:" + " " + frmLogin.TxtUser.Text;
+            panel1.BorderStyle = StatusBarPanelBorderStyle.Sunken;
+            panel1.Text = "User Logged:" + " " + String.Format("{0} - {1}", frmLogin.TxtUser.Text, _typeUser);
             panel1.Alignment = HorizontalAlignment.Left;
-	        panel1.AutoSize = StatusBarPanelAutoSize.Spring;
+            panel1.AutoSize = StatusBarPanelAutoSize.Spring;
 
             panel2.BorderStyle = StatusBarPanelBorderStyle.Sunken;
-            panel2.Text = "DateTime:" + " " + DateTime.Now;
+            panel2.Text = "Login Datetime:" + " " + DateTime.Now;
             panel2.Alignment = HorizontalAlignment.Right;
             panel2.AutoSize = StatusBarPanelAutoSize.Spring;
 
-	        statusBar1.ShowPanels = true;
+            statusBar1.ShowPanels = true;
 
-	        statusBar1.Panels.Add(panel1);
-	        statusBar1.Panels.Add(panel2);
+            statusBar1.Panels.Add(panel1);
+            statusBar1.Panels.Add(panel2);
 
-	        this.Controls.Add(statusBar1);
+            this.Controls.Add(statusBar1);
         }
 
         private void sairToolStripMenuItem_Click(object sender, EventArgs e)
@@ -68,10 +87,10 @@ namespace CrudSharp
             fs = new FrmSearch();
             fs.ShowDialog(this);
         }
-    
+
         private void FrmPrincipal_Resize(object sender, EventArgs e)
         {
-            if(this.WindowState == FormWindowState.Minimized)
+            if (this.WindowState == FormWindowState.Minimized)
             {
                 this.notifyIcon.BalloonTipIcon = System.Windows.Forms.ToolTipIcon.Info; //Shows the info icon so the user doesn't thing there is an error.
                 this.notifyIcon.BalloonTipText = "The system is still active.";
@@ -88,7 +107,7 @@ namespace CrudSharp
             this.ShowInTaskbar = true;
             notifyIcon.Visible = false;
         }
-  
+
         private void FrmPrincipal_FormClosing(object sender, FormClosingEventArgs e)
         {
             DialogResult result = MessageBox.Show("Do you want to leave the system?", "Question", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
@@ -98,10 +117,10 @@ namespace CrudSharp
                     Environment.Exit(0);
                     break;
                 case System.Windows.Forms.DialogResult.No:
-                    e.Cancel = true;
-                    this.WindowState = FormWindowState.Minimized;
                     this.ShowInTaskbar = false;
                     notifyIcon.Visible = true;
+                    e.Cancel = true;
+                    this.WindowState = FormWindowState.Minimized;
                     break;
                 default:
                     break;
@@ -118,6 +137,12 @@ namespace CrudSharp
         {
             FrmUser frmUser = new FrmUser();
             frmUser.ShowDialog(this);
+        }
+
+        private void systemLogToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FrmLog frmLog = new FrmLog();
+            frmLog.ShowDialog(this);
         }
     }
 }

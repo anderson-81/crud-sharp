@@ -81,6 +81,12 @@
     <Compile Include="FConfigDB.Designer.cs">
       <DependentUpon>FConfigDB.cs</DependentUpon>
     </Compile>
+    <Compile Include="FLog.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FLog.Designer.cs">
+      <DependentUpon>FLog.cs</DependentUpon>
+    </Compile>
     <Compile Include="FLogin.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -145,6 +151,9 @@
     <Compile Include="Reports\ReportDesignData.cs" />
     <EmbeddedResource Include="FConfigDB.resx">
       <DependentUpon>FConfigDB.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FLog.resx">
+      <DependentUpon>FLog.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FLogin.resx">
       <DependentUpon>FLogin.cs</DependentUpon>

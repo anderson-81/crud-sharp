@@ -214,5 +214,11 @@
         private System.Windows.Forms.Button btnDBConfig;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.ComboBox cmbTypeUser;
+
+        public System.Windows.Forms.ComboBox CmbTypeUser
+        {
+            get { return cmbTypeUser; }
+            set { cmbTypeUser = value; }
+        }
     }
 }

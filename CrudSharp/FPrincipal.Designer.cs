@@ -38,9 +38,11 @@
             this.registrationToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.searchToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.reportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.notifyIcon = new System.Windows.Forms.NotifyIcon(this.components);
             this.administrationToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.manageUsersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.notifyIcon = new System.Windows.Forms.NotifyIcon(this.components);
+            this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripSeparator();
+            this.systemLogToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -86,7 +88,7 @@
             this.registrationToolStripMenuItem1,
             this.searchToolStripMenuItem});
             this.physicalPersonToolStripMenuItem.Name = "physicalPersonToolStripMenuItem";
-            this.physicalPersonToolStripMenuItem.Size = new System.Drawing.Size(110, 22);
+            this.physicalPersonToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.physicalPersonToolStripMenuItem.Text = "Person";
             // 
             // registrationToolStripMenuItem1
@@ -107,8 +109,25 @@
             // 
             this.reportToolStripMenuItem.Name = "reportToolStripMenuItem";
             this.reportToolStripMenuItem.Size = new System.Drawing.Size(54, 20);
-            this.reportToolStripMenuItem.Text = "Report";
+            this.reportToolStripMenuItem.Text = "Re&port";
             this.reportToolStripMenuItem.Click += new System.EventHandler(this.reportToolStripMenuItem_Click);
+            // 
+            // administrationToolStripMenuItem
+            // 
+            this.administrationToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.manageUsersToolStripMenuItem,
+            this.toolStripMenuItem1,
+            this.systemLogToolStripMenuItem});
+            this.administrationToolStripMenuItem.Name = "administrationToolStripMenuItem";
+            this.administrationToolStripMenuItem.Size = new System.Drawing.Size(98, 20);
+            this.administrationToolStripMenuItem.Text = "&Administration";
+            // 
+            // manageUsersToolStripMenuItem
+            // 
+            this.manageUsersToolStripMenuItem.Name = "manageUsersToolStripMenuItem";
+            this.manageUsersToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.manageUsersToolStripMenuItem.Text = "&Manage Users";
+            this.manageUsersToolStripMenuItem.Click += new System.EventHandler(this.manageUsersToolStripMenuItem_Click);
             // 
             // notifyIcon
             // 
@@ -117,20 +136,17 @@
             this.notifyIcon.Visible = true;
             this.notifyIcon.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.notifyIcon_MouseDoubleClick);
             // 
-            // administrationToolStripMenuItem
+            // toolStripMenuItem1
             // 
-            this.administrationToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.manageUsersToolStripMenuItem});
-            this.administrationToolStripMenuItem.Name = "administrationToolStripMenuItem";
-            this.administrationToolStripMenuItem.Size = new System.Drawing.Size(98, 20);
-            this.administrationToolStripMenuItem.Text = "Administration";
+            this.toolStripMenuItem1.Name = "toolStripMenuItem1";
+            this.toolStripMenuItem1.Size = new System.Drawing.Size(149, 6);
             // 
-            // manageUsersToolStripMenuItem
+            // systemLogToolStripMenuItem
             // 
-            this.manageUsersToolStripMenuItem.Name = "manageUsersToolStripMenuItem";
-            this.manageUsersToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.manageUsersToolStripMenuItem.Text = "Manage Users";
-            this.manageUsersToolStripMenuItem.Click += new System.EventHandler(this.manageUsersToolStripMenuItem_Click);
+            this.systemLogToolStripMenuItem.Name = "systemLogToolStripMenuItem";
+            this.systemLogToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.systemLogToolStripMenuItem.Text = "System &Log";
+            this.systemLogToolStripMenuItem.Click += new System.EventHandler(this.systemLogToolStripMenuItem_Click);
             // 
             // FrmPrincipal
             // 
@@ -167,5 +183,7 @@
         private System.Windows.Forms.NotifyIcon notifyIcon;
         private System.Windows.Forms.ToolStripMenuItem administrationToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem manageUsersToolStripMenuItem;
+        private System.Windows.Forms.ToolStripSeparator toolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem systemLogToolStripMenuItem;
     }
 }
