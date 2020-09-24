@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmUser));
             this.gpUserData = new System.Windows.Forms.GroupBox();
             this.lblCreateAt = new System.Windows.Forms.Label();
@@ -56,6 +57,7 @@
             this.clPassword = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.clCreateAt = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.clUserType = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.clUserTypeName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.gpUserData.SuspendLayout();
             this.gpOperations.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridViewUser)).BeginInit();
@@ -307,7 +309,8 @@
             this.clUsername,
             this.clPassword,
             this.clCreateAt,
-            this.clUserType});
+            this.clUserType,
+            this.clUserTypeName});
             this.dataGridViewUser.Location = new System.Drawing.Point(12, 451);
             this.dataGridViewUser.MultiSelect = false;
             this.dataGridViewUser.Name = "dataGridViewUser";
@@ -330,6 +333,7 @@
             // 
             this.clID.DataPropertyName = "Id";
             this.clID.HeaderText = "ID";
+            this.clID.MaxInputLength = 10;
             this.clID.Name = "clID";
             this.clID.ReadOnly = true;
             this.clID.Visible = false;
@@ -348,6 +352,7 @@
             // 
             this.clUsername.DataPropertyName = "Username";
             this.clUsername.HeaderText = "USERNAME";
+            this.clUsername.MaxInputLength = 128;
             this.clUsername.Name = "clUsername";
             this.clUsername.ReadOnly = true;
             this.clUsername.Visible = false;
@@ -356,6 +361,7 @@
             // 
             this.clPassword.DataPropertyName = "Password";
             this.clPassword.HeaderText = "PASSWORD";
+            this.clPassword.MaxInputLength = 128;
             this.clPassword.Name = "clPassword";
             this.clPassword.ReadOnly = true;
             this.clPassword.Visible = false;
@@ -364,6 +370,7 @@
             // 
             this.clCreateAt.DataPropertyName = "CreateAt";
             this.clCreateAt.HeaderText = "CREATEAT";
+            this.clCreateAt.MaxInputLength = 30;
             this.clCreateAt.Name = "clCreateAt";
             this.clCreateAt.ReadOnly = true;
             this.clCreateAt.Visible = false;
@@ -374,10 +381,21 @@
             dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
             this.clUserType.DefaultCellStyle = dataGridViewCellStyle1;
             this.clUserType.HeaderText = "USERTYPE";
-            this.clUserType.MaxInputLength = 13;
+            this.clUserType.MaxInputLength = 1;
             this.clUserType.Name = "clUserType";
             this.clUserType.ReadOnly = true;
+            this.clUserType.Visible = false;
             this.clUserType.Width = 132;
+            // 
+            // clUserTypeName
+            // 
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            this.clUserTypeName.DefaultCellStyle = dataGridViewCellStyle2;
+            this.clUserTypeName.HeaderText = "USERTYPE";
+            this.clUserTypeName.MaxInputLength = 15;
+            this.clUserTypeName.Name = "clUserTypeName";
+            this.clUserTypeName.ReadOnly = true;
+            this.clUserTypeName.Width = 132;
             // 
             // FrmUser
             // 
@@ -435,6 +453,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn clPassword;
         private System.Windows.Forms.DataGridViewTextBoxColumn clCreateAt;
         private System.Windows.Forms.DataGridViewTextBoxColumn clUserType;
+        private System.Windows.Forms.DataGridViewTextBoxColumn clUserTypeName;
 
     }
 }

@@ -291,6 +291,7 @@ namespace CrudSharp
                 if (list.Count > 0)
                 {
                     this.dataGridViewUser.DataSource = list;
+                    SetNameToUserType();
                     this.ToggleForm(OptionForm.Select);
                     this.dataGridViewUser.AutoGenerateColumns = false;
 
@@ -320,10 +321,10 @@ namespace CrudSharp
         {
             dataGridViewUser.Rows[row].Selected = true;
             dataGridViewUser.FirstDisplayedScrollingRowIndex = row;
-            _id = int.Parse(this.dataGridViewUser.SelectedRows[0].Cells[0].Value.ToString());
-            txtName.Text = this.dataGridViewUser.SelectedRows[0].Cells[1].Value.ToString();
-            cmbTypeUser.SelectedIndex = int.Parse(this.dataGridViewUser.SelectedRows[0].Cells[4].Value.ToString());
-            txtCreateAt.Text = this.dataGridViewUser.SelectedRows[0].Cells[5].Value.ToString();
+            _id = int.Parse(this.dataGridViewUser.SelectedRows[0].Cells[1].Value.ToString());
+            txtName.Text = this.dataGridViewUser.SelectedRows[0].Cells[2].Value.ToString();
+            cmbTypeUser.SelectedIndex = int.Parse(this.dataGridViewUser.SelectedRows[0].Cells[5].Value.ToString());
+            txtCreateAt.Text = this.dataGridViewUser.SelectedRows[0].Cells[6].Value.ToString();
         }
 
         private void txtName_Enter(object sender, EventArgs e)
@@ -369,6 +370,17 @@ namespace CrudSharp
         {
             SetUserData(e.RowIndex);
             _rowSelected = e.RowIndex;
+        }
+
+        private void SetNameToUserType()
+        {
+            for (int i = 0; i < (dataGridViewUser.Rows.Count); i++)
+            {
+                if (dataGridViewUser.Rows[i].Cells[5].Value.ToString() == "1")
+                    dataGridViewUser.Rows[i].Cells[0].Value = "Administrator";
+                else
+                    dataGridViewUser.Rows[i].Cells[0].Value = "User";
+            }
         }
     }
 }
