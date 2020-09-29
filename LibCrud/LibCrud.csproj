@@ -146,6 +146,7 @@
   <ItemGroup>
     <Compile Include="Configs\ConfigurationDatabase.cs" />
     <Compile Include="Configs\Format.cs" />
+    <Compile Include="Controllers\AppController.cs" />
     <Compile Include="Facades\UserFacade.cs" />
     <Compile Include="Factories\ConnectionFactory.cs" />
     <Compile Include="Facades\Facade.cs" />
@@ -183,12 +184,6 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup />
-  <ItemGroup>
-    <Content Include="SQL\mysql.sql" />
-    <Content Include="SQL\postgresql.sql" />
-    <Content Include="SQL\sqlite.sql" />
-    <Content Include="SQL\sqlserver.sql" />
-  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

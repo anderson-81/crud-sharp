@@ -220,6 +220,7 @@ namespace CrudSharp
                         if (result.Equals(1))
                         {
                             MessageBox.Show("Successfully edited.", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            ClearUsernamePassword();
                             List();
                         }
                         else
@@ -344,7 +345,7 @@ namespace CrudSharp
                     int cont = 0;
                     foreach (DataGridViewRow row in dataGridViewUser.Rows)
                     {
-                        if (row.Cells[4].Value.ToString() == "1")
+                        if (row.Cells[5].Value.ToString() == "1")
                         {
                             cont++;
                         }

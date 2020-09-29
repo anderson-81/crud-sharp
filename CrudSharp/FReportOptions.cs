@@ -198,7 +198,7 @@ namespace CrudSharp
 
         private void GeneraterBornMonth()
         {
-            List<PersonFacade> datasource = Facade.FacadeInstance.GetPhysicalPersonByBirthMonth(int.Parse(("0" + 9)));
+            List<PersonFacade> datasource = Facade.FacadeInstance.GetPhysicalPersonByBirthMonth(cmbMonth.SelectedIndex + 1);
             if (datasource != null)
             {
                 if(datasource.Count > 0)

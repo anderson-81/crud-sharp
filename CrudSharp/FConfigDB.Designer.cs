@@ -31,6 +31,7 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmConfigDB));
             this.lblConfigDB = new System.Windows.Forms.Label();
             this.gpConfiguration01 = new System.Windows.Forms.GroupBox();
+            this.btnCreateTables1 = new System.Windows.Forms.Button();
             this.txtHostname = new System.Windows.Forms.TextBox();
             this.txtPassword = new System.Windows.Forms.TextBox();
             this.lblPassword = new System.Windows.Forms.Label();
@@ -44,10 +45,12 @@
             this.gpOperations = new System.Windows.Forms.GroupBox();
             this.btnDelete = new System.Windows.Forms.Button();
             this.btnSave = new System.Windows.Forms.Button();
-            this.gpConfiguration02 = new System.Windows.Forms.GroupBox();
-            this.btnBrowser = new System.Windows.Forms.Button();
-            this.txtPath = new System.Windows.Forms.TextBox();
             this.lblPath = new System.Windows.Forms.Label();
+            this.txtPath = new System.Windows.Forms.TextBox();
+            this.btnBrowser = new System.Windows.Forms.Button();
+            this.btnCreateTables2 = new System.Windows.Forms.Button();
+            this.gpConfiguration02 = new System.Windows.Forms.GroupBox();
+            this.openFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.gpConfiguration01.SuspendLayout();
             this.gpOperations.SuspendLayout();
             this.gpConfiguration02.SuspendLayout();
@@ -65,6 +68,7 @@
             // 
             // gpConfiguration01
             // 
+            this.gpConfiguration01.Controls.Add(this.btnCreateTables1);
             this.gpConfiguration01.Controls.Add(this.txtHostname);
             this.gpConfiguration01.Controls.Add(this.txtPassword);
             this.gpConfiguration01.Controls.Add(this.lblPassword);
@@ -83,6 +87,20 @@
             this.gpConfiguration01.TabStop = false;
             this.gpConfiguration01.Text = "Configuration";
             this.gpConfiguration01.Visible = false;
+            // 
+            // btnCreateTables1
+            // 
+            this.btnCreateTables1.BackColor = System.Drawing.Color.RoyalBlue;
+            this.btnCreateTables1.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnCreateTables1.Enabled = false;
+            this.btnCreateTables1.ForeColor = System.Drawing.Color.White;
+            this.btnCreateTables1.Location = new System.Drawing.Point(280, 239);
+            this.btnCreateTables1.Name = "btnCreateTables1";
+            this.btnCreateTables1.Size = new System.Drawing.Size(130, 35);
+            this.btnCreateTables1.TabIndex = 26;
+            this.btnCreateTables1.Text = "Create Tables";
+            this.btnCreateTables1.UseVisualStyleBackColor = false;
+            this.btnCreateTables1.Click += new System.EventHandler(this.btnCreateTables1_Click);
             // 
             // txtHostname
             // 
@@ -221,19 +239,25 @@
             this.btnSave.UseVisualStyleBackColor = false;
             this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
-            // gpConfiguration02
+            // lblPath
             // 
-            this.gpConfiguration02.Controls.Add(this.btnBrowser);
-            this.gpConfiguration02.Controls.Add(this.txtPath);
-            this.gpConfiguration02.Controls.Add(this.lblPath);
-            this.gpConfiguration02.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.gpConfiguration02.Location = new System.Drawing.Point(16, 32);
-            this.gpConfiguration02.Name = "gpConfiguration02";
-            this.gpConfiguration02.Size = new System.Drawing.Size(422, 345);
-            this.gpConfiguration02.TabIndex = 25;
-            this.gpConfiguration02.TabStop = false;
-            this.gpConfiguration02.Text = "Configuration";
-            this.gpConfiguration02.Visible = false;
+            this.lblPath.AutoSize = true;
+            this.lblPath.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblPath.Location = new System.Drawing.Point(6, 80);
+            this.lblPath.Name = "lblPath";
+            this.lblPath.Size = new System.Drawing.Size(42, 20);
+            this.lblPath.TabIndex = 15;
+            this.lblPath.Text = "Path";
+            // 
+            // txtPath
+            // 
+            this.txtPath.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.txtPath.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtPath.Location = new System.Drawing.Point(10, 103);
+            this.txtPath.Name = "txtPath";
+            this.txtPath.ReadOnly = true;
+            this.txtPath.Size = new System.Drawing.Size(300, 26);
+            this.txtPath.TabIndex = 6;
             // 
             // btnBrowser
             // 
@@ -248,25 +272,43 @@
             this.btnBrowser.UseVisualStyleBackColor = false;
             this.btnBrowser.Click += new System.EventHandler(this.btnBrowser_Click);
             // 
-            // txtPath
+            // btnCreateTables2
             // 
-            this.txtPath.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.txtPath.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtPath.Location = new System.Drawing.Point(10, 103);
-            this.txtPath.Name = "txtPath";
-            this.txtPath.ReadOnly = true;
-            this.txtPath.Size = new System.Drawing.Size(300, 26);
-            this.txtPath.TabIndex = 6;
+            this.btnCreateTables2.BackColor = System.Drawing.Color.RoyalBlue;
+            this.btnCreateTables2.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnCreateTables2.Enabled = false;
+            this.btnCreateTables2.ForeColor = System.Drawing.Color.White;
+            this.btnCreateTables2.Location = new System.Drawing.Point(280, 239);
+            this.btnCreateTables2.Name = "btnCreateTables2";
+            this.btnCreateTables2.Size = new System.Drawing.Size(130, 35);
+            this.btnCreateTables2.TabIndex = 16;
+            this.btnCreateTables2.Text = "Create Tables";
+            this.btnCreateTables2.UseVisualStyleBackColor = false;
+            this.btnCreateTables2.Click += new System.EventHandler(this.btnCreateTables2_Click_1);
             // 
-            // lblPath
+            // gpConfiguration02
             // 
-            this.lblPath.AutoSize = true;
-            this.lblPath.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblPath.Location = new System.Drawing.Point(6, 80);
-            this.lblPath.Name = "lblPath";
-            this.lblPath.Size = new System.Drawing.Size(42, 20);
-            this.lblPath.TabIndex = 15;
-            this.lblPath.Text = "Path";
+            this.gpConfiguration02.Controls.Add(this.btnCreateTables2);
+            this.gpConfiguration02.Controls.Add(this.btnBrowser);
+            this.gpConfiguration02.Controls.Add(this.txtPath);
+            this.gpConfiguration02.Controls.Add(this.lblPath);
+            this.gpConfiguration02.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.gpConfiguration02.Location = new System.Drawing.Point(16, 32);
+            this.gpConfiguration02.Name = "gpConfiguration02";
+            this.gpConfiguration02.Size = new System.Drawing.Size(422, 345);
+            this.gpConfiguration02.TabIndex = 27;
+            this.gpConfiguration02.TabStop = false;
+            this.gpConfiguration02.Text = "Configuration";
+            this.gpConfiguration02.Visible = false;
+            // 
+            // openFileDialog
+            // 
+            this.openFileDialog.AutoUpgradeEnabled = false;
+            this.openFileDialog.DefaultExt = "db";
+            this.openFileDialog.Filter = "SQLite Database File (*.db)|*.db;";
+            this.openFileDialog.FilterIndex = 0;
+            this.openFileDialog.InitialDirectory = "@\"\"";
+            this.openFileDialog.RestoreDirectory = true;
             // 
             // FrmConfigDB
             // 
@@ -313,11 +355,14 @@
         private System.Windows.Forms.GroupBox gpOperations;
         private System.Windows.Forms.Button btnDelete;
         private System.Windows.Forms.Button btnSave;
-        private System.Windows.Forms.GroupBox gpConfiguration02;
-        private System.Windows.Forms.Label lblPath;
-        private System.Windows.Forms.Button btnBrowser;
-        private System.Windows.Forms.TextBox txtPath;
         private System.Windows.Forms.TextBox txtHostname;
+        private System.Windows.Forms.Button btnCreateTables1;
+        private System.Windows.Forms.Label lblPath;
+        private System.Windows.Forms.TextBox txtPath;
+        private System.Windows.Forms.Button btnBrowser;
+        private System.Windows.Forms.Button btnCreateTables2;
+        private System.Windows.Forms.GroupBox gpConfiguration02;
+        private System.Windows.Forms.OpenFileDialog openFileDialog;
 
     }
 }

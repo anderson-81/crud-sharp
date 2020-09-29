@@ -15,10 +15,12 @@ namespace LibCrud
         private PhysicalPersonController _ppc;
         private JuridicalPersonController _jpc;
         private UserController _uc;
+        private AppController _app;
         private PersonFactory _pf;
         private User _user;
         private string _errors = "";
         private Log _log = Log.GetLogInstance;
+        private string _tbUser = "";
 
         public enum OptionPerson
         {
@@ -55,6 +57,7 @@ namespace LibCrud
         #region Facade
         Facade()
         {
+            SetTableNameByDatabase();
         }
         static Facade()
         {
@@ -428,7 +431,7 @@ namespace LibCrud
 
                     if (vusername)
                     {
-                        if (validation.CheckIfExistInDatabase<string>("USER", "USERNAME", format.GenerateHASH(user.Username)))
+                        if (validation.CheckIfExistInDatabase<string>(_tbUser, "USERNAME", format.GenerateHASH(user.Username)))
                         {
                             SetError("Username already registered.");
                         }
@@ -457,6 +460,30 @@ namespace LibCrud
             }
         }
 
+        #endregion
+
+        #region Configuration Database
+        private void SetTableNameByDatabase()
+        {
+            switch (new ConfigurationDatabase().GetConnectionConfiguration().name.ToString())
+            {
+                case "SQLServer":
+                    _tbUser = "\"USER\"";
+                    break;
+                case "PostgreSQL":
+                    _tbUser = "\"user\"";
+                    break;
+                case "SQLite":
+                    _tbUser = "USER";
+                    break;
+                case "MySQL":
+                    _tbUser = "USER";
+                    break;
+                default:
+                    Environment.Exit(0);
+                    break;
+            }
+        }
         #endregion
 
         #region PhysicalPerson
@@ -664,6 +691,7 @@ namespace LibCrud
             _user = new User();
             _user.Username = username;
             _user.Password = password;
+            _user.Name = "";
 
             switch (userType)
             {
@@ -746,6 +774,14 @@ namespace LibCrud
             _user.Id = id;
             _uc = new UserController(_user);
             return _uc.DeletetUser();
+        }
+        #endregion
+
+        #region AppController
+        public object CreateTables()
+        {
+            _app = new AppController();
+            return _app.CreateTables();
         }
         #endregion
     }

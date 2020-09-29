@@ -100,7 +100,7 @@ namespace LibCrud
             catch (Exception)
             {
                 _log.SetLog("getConnection", "Error getting connection configuration.", DateTime.Now);
-                throw;
+                return null;
             }
         }
         #endregion

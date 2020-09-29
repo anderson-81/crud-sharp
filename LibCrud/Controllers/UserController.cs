@@ -18,19 +18,22 @@ namespace LibCrud
         protected IDbCommand _cmd = ConnectionFactory.getInstance().getConnection().CreateCommand();
         private Log _log = Log.GetLogInstance;
         private Format format = new Format();
+        private string _table = "";
         #endregion
 
         #region Constructor
         public UserController(User user)
         {
             this._user = user;
+            SetTableNameByDatabase();
         }
         #endregion
 
         #region CreateParameters
         private void CreateParameters()
         {
-            List<string> parameters = new List<string>() { "@ID", "@USERNAME", "@PASSWORD", "@TYPEUSER", "@CREATEAT" };
+            this._cmd.Parameters.Clear();
+            List<string> parameters = new List<string>() { "@ID", "@NAME", "@USERNAME", "@PASSWORD", "@TYPEUSER", "@CREATEAT" };
             Dictionary<string, object> values = null;
 
             if (new StackTrace().GetFrame(1).GetMethod().Name == "GetUserByName")
@@ -76,7 +79,6 @@ namespace LibCrud
             p.ParameterName = "@" + parameterName;
             p.Value = parameterValue;
             this._cmd.Parameters.Add(p);
-
             SetLog("CreateUniqueParameter", "", DateTime.Now);
         }
         #endregion
@@ -113,7 +115,7 @@ namespace LibCrud
             IDbConnection conn = this._cmd.Connection;
             try
             {
-                String cmdStr = "SELECT * FROM USER WHERE USERNAME = @USERNAME AND PASSWORD = @PASSWORD AND TYPEUSER = @TYPEUSER;";
+                String cmdStr = string.Format("SELECT * FROM {0} WHERE USERNAME = @USERNAME AND PASSWORD = @PASSWORD AND TYPEUSER = @TYPEUSER;", _table);
                 this._cmd.CommandText = cmdStr;
                 this.CreateParameters();
 
@@ -149,7 +151,7 @@ namespace LibCrud
 
             try
             {
-                String cmdStr = "INSERT INTO \"USER\" (NAME, USERNAME, PASSWORD, TYPEUSER, CREATEAT) VALUES(@NAME, @USERNAME, @PASSWORD, @TYPEUSER, @CREATEAT);";
+                String cmdStr = string.Format("INSERT INTO {0} (NAME, USERNAME, PASSWORD, TYPEUSER, CREATEAT) VALUES(@NAME, @USERNAME, @PASSWORD, @TYPEUSER, @CREATEAT);", _table);
                 this.CreateParameters();
                 this._cmd.CommandText = cmdStr;
                 this._cmd.ExecuteNonQuery();
@@ -177,7 +179,7 @@ namespace LibCrud
 
             try
             {
-                String cmdStr = "UPDATE \"USER\" SET NAME = @NAME, USERNAME = @USERNAME, PASSWORD = @PASSWORD, TYPEUSER = @TYPEUSER WHERE ID = @ID;";
+                String cmdStr = string.Format("UPDATE {0} SET NAME = @NAME, USERNAME = @USERNAME, PASSWORD = @PASSWORD, TYPEUSER = @TYPEUSER WHERE ID = @ID;", _table);
                 this.CreateParameters();
                 this._cmd.CommandText = cmdStr;
                 this._cmd.ExecuteNonQuery();
@@ -204,7 +206,7 @@ namespace LibCrud
 
             try
             {
-                String cmdStr = "DELETE FROM \"USER\" WHERE ID = @ID;";
+                String cmdStr = string.Format("DELETE FROM {0} WHERE ID = @ID;", _table);
                 this.CreateUniqueParameter<int>("ID", _user.Id);
                 this._cmd.CommandText = cmdStr;
                 this._cmd.ExecuteNonQuery();
@@ -229,7 +231,7 @@ namespace LibCrud
             try
             {
                 UserFacade userFacade = null;
-                String cmdStr = "SELECT * FROM USER WHERE ID = @ID;";
+                String cmdStr = string.Format("SELECT * FROM {0} WHERE ID = @ID;", _table);
                 this._cmd.CommandText = cmdStr;
                 this.CreateUniqueParameter<int>("ID", _user.Id);
                 IDataReader reader = this._cmd.ExecuteReader();
@@ -259,7 +261,7 @@ namespace LibCrud
             try
             {
                 List<UserFacade> list = null;
-                String cmdStr = "SELECT * FROM USER WHERE USERNAME LIKE @USERNAME;";
+                String cmdStr = string.Format("SELECT * FROM {0} WHERE USERNAME LIKE @USERNAME;", _table);
                 this._cmd.CommandText = cmdStr;
                 this.CreateUniqueParameter<string>("USERNAME", this._user.Username + '%');
                 IDataReader reader = this._cmd.ExecuteReader();
@@ -281,6 +283,30 @@ namespace LibCrud
         protected void SetLog(string method, string result, DateTime datetime)
         {
             _log.SetLog(method, result, datetime);
+        }
+        #endregion
+
+        #region Configuration Database
+        private void SetTableNameByDatabase()
+        {
+            switch (new ConfigurationDatabase().GetConnectionConfiguration().name.ToString())
+            {
+                case "SQLServer":
+                    _table = "\"USER\"";
+                    break;
+                case "PostgreSQL":
+                    _table = "\"user\"";
+                    break;
+                case "SQLite":
+                    _table = "USER";
+                    break;
+                case "MySQL":
+                    _table = "USER";
+                    break;
+                default:
+                    Environment.Exit(0);
+                    break;
+            }
         }
         #endregion
     }

@@ -338,7 +338,7 @@
             this.columnRegister.Name = "columnRegister";
             this.columnRegister.ReadOnly = true;
             this.columnRegister.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.columnRegister.Width = 130;
+            this.columnRegister.Width = 140;
             // 
             // columnName
             // 
@@ -402,10 +402,10 @@
         private System.Windows.Forms.RadioButton rdForNamePP;
         private System.Windows.Forms.MaskedTextBox mskTextCPF;
         private System.Windows.Forms.MaskedTextBox mskTextCNPJ;
+        private System.Windows.Forms.DataGridView dgvPerson;
         private System.Windows.Forms.DataGridViewTextBoxColumn columnID;
         private System.Windows.Forms.DataGridViewTextBoxColumn columnRegister;
         private System.Windows.Forms.DataGridViewTextBoxColumn columnName;
-        private System.Windows.Forms.DataGridView dgvPerson;
 
     }
 }

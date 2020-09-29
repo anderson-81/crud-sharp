@@ -178,16 +178,6 @@ namespace CrudSharp
             gp.Visible = show;
         }
 
-        private void btnBrowser_Click(object sender, EventArgs e)
-        {
-            OpenFileDialog openFileDialog = new OpenFileDialog();
-            openFileDialog.Filter = "SQLite database File|*.db";
-            if(openFileDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
-            {
-                this.txtPath.Text = openFileDialog.FileName;
-            }
-        }
-
         private ConfigurationDatabase.DatabaseName GetDatabaseName()
         {
             if (dbSelectedIndex == 1)
@@ -267,11 +257,16 @@ namespace CrudSharp
                     btnBrowser.Enabled = false;
                     this.txtPath.ReadOnly = true;
                 }
+                btnSave.Enabled = false;
+                btnCreateTables1.Enabled = true;
+                btnCreateTables2.Enabled = true;
             }
             else
             {
-                btnSave.Enabled = true;
                 btnDelete.Enabled = false;
+                btnCreateTables1.Enabled = false;
+                btnCreateTables2.Enabled = false;
+                btnSave.Enabled = true;
             }
         }
 
@@ -323,6 +318,43 @@ namespace CrudSharp
                     MessageBox.Show("Error deleting database connection configuration.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     Environment.Exit(0);
                 }
+            }
+        }
+
+        private void btnCreateTables2_Click(object sender, EventArgs e)
+        {
+            CreateTables();
+        }
+
+        private void CreateTables()
+        {
+            DialogResult dialogResult = MessageBox.Show("Do you want create the system tables?" + Environment.NewLine + "Existing tables will be deleted.", "Question", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (dialogResult == System.Windows.Forms.DialogResult.Yes)
+            {
+                Facade facade = Facade.FacadeInstance;
+                object result = facade.CreateTables();
+                if(result.Equals(1))
+                    MessageBox.Show("Successfully created.", "Information", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                else
+                    MessageBox.Show("Error creating system tables.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void btnCreateTables1_Click(object sender, EventArgs e)
+        {
+            CreateTables();
+        }
+
+        private void btnCreateTables2_Click_1(object sender, EventArgs e)
+        {
+            CreateTables();
+        }
+
+        private void btnBrowser_Click(object sender, EventArgs e)
+        {
+            if (openFileDialog.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            {
+                this.txtPath.Text = openFileDialog.FileName;
             }
         }
     }

@@ -7,8 +7,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LibCrud", "LibCrud\LibCrud.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CrudSharp", "CrudSharp\CrudSharp.csproj", "{59ADA647-9D08-446D-A832-1753F3F8A24A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleApp", "ConsoleApp\ConsoleApp.csproj", "{B9C742AB-757D-4F98-956D-3E65DEFA462C}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{DFBFA8FF-FB86-4851-A625-6A03593AA922}"
 	ProjectSection(SolutionItems) = preProject
 		.nuget\packages.config = .nuget\packages.config
@@ -28,10 +26,6 @@ Global
 		{59ADA647-9D08-446D-A832-1753F3F8A24A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{59ADA647-9D08-446D-A832-1753F3F8A24A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{59ADA647-9D08-446D-A832-1753F3F8A24A}.Release|Any CPU.Build.0 = Release|Any CPU
-		{B9C742AB-757D-4F98-956D-3E65DEFA462C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{B9C742AB-757D-4F98-956D-3E65DEFA462C}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{B9C742AB-757D-4F98-956D-3E65DEFA462C}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{B9C742AB-757D-4F98-956D-3E65DEFA462C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

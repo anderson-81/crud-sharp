@@ -311,9 +311,7 @@
             this.cmbAVG.Items.AddRange(new object[] {
             "Under",
             "Equal",
-            "Above",
-            "",
-            ""});
+            "Above"});
             this.cmbAVG.Location = new System.Drawing.Point(8, 43);
             this.cmbAVG.Margin = new System.Windows.Forms.Padding(2);
             this.cmbAVG.Name = "cmbAVG";
