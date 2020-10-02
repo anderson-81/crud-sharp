@@ -2,10 +2,10 @@
 
 ![GitHub](https://img.shields.io/github/license/anderson-81/crud-sharp)![GitHub last commit](https://img.shields.io/github/last-commit/anderson-81/crud-sharp)![GitHub language count](https://img.shields.io/github/languages/count/anderson-81/crud-sharp)![GitHub language count](https://img.shields.io/github/languages/count/anderson-81/crud-sharp)![GitHub All Releases](https://img.shields.io/github/downloads/anderson-81/crud-sharp/total)
 
-1 - Description:
+### 1 - Description:
 - Registration system made in C# with database. The database to be used can be chosen in the database connection configuration.
 
-2 - System Characteristics:
+### 2 - System Characteristics:
 - Database Connection Configuration:
     - SQL Server
     - PostgreSQL
@@ -23,7 +23,7 @@
 - System Log (by text)
 - Hide Icon (Toolbar)
 
-3 - Software and Tools used:
+### 3 - Software and Tools used:
 - Visual Studio 2013
 - .NET Framework 4.8 
 - Libraries for database connection:
